@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Annonce {
+class Annonce: ObservableObject {
     var id: Int
     
     var nom: String

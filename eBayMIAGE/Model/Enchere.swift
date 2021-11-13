@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Enchere {
+class Enchere: ObservableObject {
     var prix: Double
     var date: Date
     
