@@ -23,7 +23,7 @@ struct YourAnnouncementsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             AnnouncerView()
-            Spacer()
+            Divider()
             BidderView()
         }
     }
@@ -49,12 +49,31 @@ struct AnnouncerView: View {
         VStack(alignment: .leading) {
             Text("Vos annonces")
             
-            if let announcements = announcements {
+            List {
                 ForEach(announcements, id: \.id) { announcement in
-                    NavigationLink(destination: AnnouncementView()) {
-                        Text("\(announcement.nom)")
-                    }
+                    AnnouncerRow(announcement: announcement)
                 }
+            }
+        }
+    }
+}
+
+struct AnnouncerRow: View {
+    
+    var announcement: Annonce
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "1.square.fill")
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(announcement.nom)
+                    Spacer()
+                    Text("durée")
+                }
+                
+                Text(announcement.prixPlanche)
             }
         }
     }
@@ -62,18 +81,44 @@ struct AnnouncerView: View {
 
 struct BidderView: View {
     
-    var announcements: [Annonce]?
+    var announcements: [Annonce]
+    
+    init() {
+        announcements = []
+        
+        let count = 1...10
+        
+        for _ in count {
+            let newAnnounce = Annonce(nom: "test", description: "descriptionTest", prixPlanche: "10", etat: 0, duree: Date.now, photo: "")
+            
+            self.announcements.append(newAnnounce)
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Vos enchères")
             
-            if let announcements = announcements {
+            List {
                 ForEach(announcements, id: \.id) { announcement in
-                    NavigationLink(destination: AnnouncementView()) {
-                        Text("\(announcement.nom)")
-                    }
+                    BidderRow(announcement: announcement)
                 }
+            }
+        }
+    }
+}
+
+struct BidderRow: View {
+    
+    var announcement: Annonce
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "1.square.fill")
+            
+            VStack(alignment: .leading) {
+                Text(announcement.nom)
+                Text(announcement.description)
             }
         }
     }

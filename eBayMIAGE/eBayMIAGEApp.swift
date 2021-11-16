@@ -11,7 +11,7 @@ import SwiftUI
 struct eBayMIAGEApp: App {
     var body: some Scene {
         WindowGroup {
-            MyTabView()
+            MainTabView()
         }
     }
 }

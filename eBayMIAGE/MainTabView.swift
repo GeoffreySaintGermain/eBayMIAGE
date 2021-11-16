@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct MyTabView: View {
+struct MainTabView: View {
     @StateObject var user: Utilisateur = Utilisateur.shared
     
     var body: some View {
-        TabView {
+        TabView{
             if user.isLogged {
                 HomeView()
                     .tabItem {

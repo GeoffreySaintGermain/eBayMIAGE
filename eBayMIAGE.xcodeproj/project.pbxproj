@@ -20,7 +20,7 @@
 		AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */; };
 		AAE1D8F127412AA300B93028 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F027412AA300B93028 /* Button.swift */; };
 		AAE1D8F4274141B000B93028 /* UtilisateurViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F3274141B000B93028 /* UtilisateurViewModel.swift */; };
-		AAE1D8F627438CDD00B93028 /* MyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F527438CDD00B93028 /* MyTabView.swift */; };
+		AAE1D8F627438CDD00B93028 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F527438CDD00B93028 /* MainTabView.swift */; };
 		AAE1D8F92743944700B93028 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F82743944700B93028 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +39,7 @@
 		AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		AAE1D8F027412AA300B93028 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		AAE1D8F3274141B000B93028 /* UtilisateurViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilisateurViewModel.swift; sourceTree = "<group>"; };
-		AAE1D8F527438CDD00B93028 /* MyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabView.swift; sourceTree = "<group>"; };
+		AAE1D8F527438CDD00B93028 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		AAE1D8F82743944700B93028 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */,
-				AAE1D8F527438CDD00B93028 /* MyTabView.swift */,
+				AAE1D8F527438CDD00B93028 /* MainTabView.swift */,
 				AAE1D8EF27412A9300B93028 /* Util */,
 				AAE1D8E8273FF28800B93028 /* Model */,
 				AAE1D8F22741419600B93028 /* ViewModel */,
@@ -229,7 +229,7 @@
 				AAE1D8F127412AA300B93028 /* Button.swift in Sources */,
 				AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */,
 				AAE1D8CB273E7C8400B93028 /* eBayMIAGEApp.swift in Sources */,
-				AAE1D8F627438CDD00B93028 /* MyTabView.swift in Sources */,
+				AAE1D8F627438CDD00B93028 /* MainTabView.swift in Sources */,
 				AAE1D8D9273FE49B00B93028 /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
