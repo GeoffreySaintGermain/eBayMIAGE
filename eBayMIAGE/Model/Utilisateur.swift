@@ -9,19 +9,28 @@
 import Foundation
 
 class Utilisateur: ObservableObject {
-    var identifiant: String?
-    var id: UUID
     
-    var nom: String
-    var prenom: String
-    var mail: String
-    var mdp: String
-    var photo: String?
+    /// singleton
+    public static var shared = Utilisateur()
+    @Published var isChanged = false
+            
+    @Published var identifiant: String?
+    @Published var id: UUID?
     
-    var date: Date
+    @Published var nom: String?
+    @Published var prenom: String?
+    @Published var mail: String?
+    @Published var mdp: String?
+    @Published var photo: String?
     
-    var latitude: String?
-    var longitude: String?
+    @Published var date: Date?
+    
+    @Published var latitude: String?
+    @Published var longitude: String?
+    
+    public var isLogged: Bool {
+        id != nil
+    }
     
     init(nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String? = nil, longitude: String? = nil) {
         self.identifiant = nil
@@ -36,4 +45,6 @@ class Utilisateur: ObservableObject {
         self.longitude = longitude
     }
     
+    private init() {
+    }
 }

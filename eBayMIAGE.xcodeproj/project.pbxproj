@@ -20,6 +20,8 @@
 		AAE1D8EA273FF2A900B93028 /* Utilisateur.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8E9273FF2A900B93028 /* Utilisateur.swift */; };
 		AAE1D8EC273FF2BD00B93028 /* Enchere.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8EB273FF2BD00B93028 /* Enchere.swift */; };
 		AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */; };
+		AAE1D8F127412AA300B93028 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F027412AA300B93028 /* Button.swift */; };
+		AAE1D8F4274141B000B93028 /* UtilisateurViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F3274141B000B93028 /* UtilisateurViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		AAE1D8E9273FF2A900B93028 /* Utilisateur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilisateur.swift; sourceTree = "<group>"; };
 		AAE1D8EB273FF2BD00B93028 /* Enchere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enchere.swift; sourceTree = "<group>"; };
 		AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
+		AAE1D8F027412AA300B93028 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		AAE1D8F3274141B000B93028 /* UtilisateurViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilisateurViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +73,9 @@
 		AAE1D8C9273E7C8400B93028 /* eBayMIAGE */ = {
 			isa = PBXGroup;
 			children = (
+				AAE1D8EF27412A9300B93028 /* Util */,
 				AAE1D8E8273FF28800B93028 /* Model */,
+				AAE1D8F22741419600B93028 /* ViewModel */,
 				AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */,
 				AAE1D8E3273FED0100B93028 /* Announcement */,
 				AAE1D8E2273FEC6C00B93028 /* Sign */,
@@ -116,6 +122,22 @@
 				AAE1D8EB273FF2BD00B93028 /* Enchere.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AAE1D8EF27412A9300B93028 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				AAE1D8F027412AA300B93028 /* Button.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		AAE1D8F22741419600B93028 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AAE1D8F3274141B000B93028 /* UtilisateurViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,10 +213,12 @@
 				AAE1D8EC273FF2BD00B93028 /* Enchere.swift in Sources */,
 				AAE1D8DF273FEC5400B93028 /* SignInView.swift in Sources */,
 				AAE1D8EA273FF2A900B93028 /* Utilisateur.swift in Sources */,
+				AAE1D8F4274141B000B93028 /* UtilisateurViewModel.swift in Sources */,
 				AAE1D8DB273FE9C300B93028 /* NewAnnouncementView.swift in Sources */,
 				AAE1D8E7273FF27E00B93028 /* Annonce.swift in Sources */,
 				AAE1D8E1273FEC6000B93028 /* SignUpView.swift in Sources */,
 				AAE1D8E5273FED8700B93028 /* SideMenu.swift in Sources */,
+				AAE1D8F127412AA300B93028 /* Button.swift in Sources */,
 				AAE1D8CD273E7C8400B93028 /* ContentView.swift in Sources */,
 				AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */,
 				AAE1D8CB273E7C8400B93028 /* eBayMIAGEApp.swift in Sources */,
@@ -326,10 +350,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eBayMIAGE/Preview Content\"";
-				DEVELOPMENT_TEAM = B4A9W94SJ9;
+				DEVELOPMENT_TEAM = QQR8XPJ799;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -344,6 +369,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.miage.toulouse.eBayMIAGE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -355,10 +381,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eBayMIAGE/Preview Content\"";
-				DEVELOPMENT_TEAM = B4A9W94SJ9;
+				DEVELOPMENT_TEAM = QQR8XPJ799;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -373,6 +400,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.miage.toulouse.eBayMIAGE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

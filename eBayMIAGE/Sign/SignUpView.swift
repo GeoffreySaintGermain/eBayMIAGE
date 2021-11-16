@@ -18,31 +18,34 @@ struct SignUpView: View {
     
     private func inscription() {
         // TODO: méthode à remplir
-        let newUser = Utilisateur(nom: nom, prenom: prenom, mail: mail, mdp: mdp)
-        
-        HomeView.user = newUser
+        _ = Utilisateur(nom: nom, prenom: prenom, mail: mail, mdp: mdp)
+
         presentationMode.wrappedValue.dismiss()
     }
     
     var body: some View {
-        NavigationView {
-            Form {
-                TextField("Nom", text: $nom)
-                TextField("Prenom", text: $prenom)
-                TextField("Mail", text: $mail)
-                TextField("Mot de passe", text: $mdp)
-//                TextField("Nom", $nom)
-            }
+        VStack(spacing: 10) {
+            Spacer()
+            TextField("Nom", text: $nom)
+                .padding(.bottom)
+            TextField("Prenom", text: $prenom)
+                .padding(.bottom)
+            TextField("Mail", text: $mail)
+                .padding(.bottom)
+            TextField("Mot de passe", text: $mdp)
             
             Button{
                 inscription()
             } label: {
-                Text("Valider l'inscription")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .foregroundColor(.white)
-                    .background(.orange)
+                Text("Valider l'inscription")                    
             }
+            .buttonStyle(OrangeButton())
+            .padding(.top)
+            
+            Spacer()
         }
-        .navigationBarBackButtonHidden(true)
+        .padding()
+        .navigationTitle("Inscription")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
