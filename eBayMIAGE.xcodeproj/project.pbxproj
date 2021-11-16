@@ -18,7 +18,7 @@
 		AAE1D8EA273FF2A900B93028 /* Utilisateur.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8E9273FF2A900B93028 /* Utilisateur.swift */; };
 		AAE1D8EC273FF2BD00B93028 /* Enchere.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8EB273FF2BD00B93028 /* Enchere.swift */; };
 		AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */; };
-		AAE1D8F127412AA300B93028 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F027412AA300B93028 /* Button.swift */; };
+		AAE1D8F127412AA300B93028 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F027412AA300B93028 /* Buttons.swift */; };
 		AAE1D8F4274141B000B93028 /* UtilisateurViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F3274141B000B93028 /* UtilisateurViewModel.swift */; };
 		AAE1D8F627438CDD00B93028 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F527438CDD00B93028 /* MainTabView.swift */; };
 		AAE1D8F92743944700B93028 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F82743944700B93028 /* ProfileView.swift */; };
@@ -37,7 +37,7 @@
 		AAE1D8E9273FF2A900B93028 /* Utilisateur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilisateur.swift; sourceTree = "<group>"; };
 		AAE1D8EB273FF2BD00B93028 /* Enchere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enchere.swift; sourceTree = "<group>"; };
 		AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
-		AAE1D8F027412AA300B93028 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		AAE1D8F027412AA300B93028 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		AAE1D8F3274141B000B93028 /* UtilisateurViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilisateurViewModel.swift; sourceTree = "<group>"; };
 		AAE1D8F527438CDD00B93028 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		AAE1D8F82743944700B93028 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		AAE1D8EF27412A9300B93028 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				AAE1D8F027412AA300B93028 /* Button.swift */,
+				AAE1D8F027412AA300B93028 /* Buttons.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -226,7 +226,7 @@
 				AAE1D8DB273FE9C300B93028 /* NewAnnouncementView.swift in Sources */,
 				AAE1D8E7273FF27E00B93028 /* Annonce.swift in Sources */,
 				AAE1D8E1273FEC6000B93028 /* SignUpView.swift in Sources */,
-				AAE1D8F127412AA300B93028 /* Button.swift in Sources */,
+				AAE1D8F127412AA300B93028 /* Buttons.swift in Sources */,
 				AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */,
 				AAE1D8CB273E7C8400B93028 /* eBayMIAGEApp.swift in Sources */,
 				AAE1D8F627438CDD00B93028 /* MainTabView.swift in Sources */,

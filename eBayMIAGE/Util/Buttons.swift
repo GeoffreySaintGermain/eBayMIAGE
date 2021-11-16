@@ -1,5 +1,5 @@
 //
-//  Button.swift
+//  Buttons.swift
 //  eBayMIAGE
 //
 //  Created by SAINT GERMAIN on 14/11/2021.

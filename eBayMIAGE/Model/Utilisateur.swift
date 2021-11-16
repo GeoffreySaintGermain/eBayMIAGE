@@ -10,8 +10,11 @@ import Foundation
 
 class Utilisateur: ObservableObject {
     
-    /// singleton
+    // MARK: Attributes
+    
+    /// Singleton
     public static var shared = Utilisateur()
+    
     @Published var isChanged = false
                 
     @Published var id: UUID?
@@ -32,18 +35,7 @@ class Utilisateur: ObservableObject {
         id != nil
     }
     
-//    init(nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String? = nil, longitude: String? = nil) {
-//        self.identifiant = nil
-//        self.id = UUID()
-//        self.nom = nom
-//        self.prenom = prenom
-//        self.mail = mail
-//        self.mdp = mdp
-//        self.photo = photo
-//        self.date = Date.now
-//        self.latitude = latitude
-//        self.longitude = longitude
-//    }
+    // MARK: Constructor
     
     private init() {
         self.identifiant = ""
@@ -54,6 +46,8 @@ class Utilisateur: ObservableObject {
         self.latitude = ""
         self.longitude = ""
     }
+    
+    // MARK: Functions
 
     public func connexion(identifiant: String, nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String = "", longitude: String = "") {
         self.id = UUID()
