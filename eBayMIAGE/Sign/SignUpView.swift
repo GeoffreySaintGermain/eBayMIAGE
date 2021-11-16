@@ -18,7 +18,6 @@ struct SignUpView: View {
     
     private func inscription() {
         // TODO: méthode à remplir
-        _ = Utilisateur(nom: nom, prenom: prenom, mail: mail, mdp: mdp)
 
         presentationMode.wrappedValue.dismiss()
     }
@@ -37,7 +36,8 @@ struct SignUpView: View {
             Button{
                 inscription()
             } label: {
-                Text("Valider l'inscription")                    
+                Text("Valider l'inscription")
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
             .buttonStyle(OrangeButton())
             .padding(.top)

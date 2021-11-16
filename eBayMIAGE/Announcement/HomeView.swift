@@ -9,28 +9,19 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var user: Utilisateur = Utilisateur.shared
+    @EnvironmentObject var user: Utilisateur
     
     var body: some View {
-        VStack {
-            if let _ = user.id {
-                Text("Bonjour \(user.nom ?? "")")
-                YourAnnouncementsView()
-                Spacer()
-            } else {
-                NotSignView(dismissClosure: { user in
-                    Utilisateur.shared = user
-                    self.user = user
-                })
-            }
-        }        
+        VStack(alignment: .leading) {
+            YourAnnouncementsView()
+        }                        
     }
 }
 
 struct YourAnnouncementsView: View {
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             AnnouncerView()
             Spacer()
             BidderView()
@@ -40,17 +31,31 @@ struct YourAnnouncementsView: View {
 
 struct AnnouncerView: View {
     
-    var announcements: [Annonce]?
+    var announcements: [Annonce]
+    
+    init() {
+        announcements = []
+        
+        let count = 1...10
+        
+        for _ in count {
+            let newAnnounce = Annonce(nom: "test", description: "descriptionTest", prixPlanche: "10", etat: 0, duree: Date.now, photo: "")
+            
+            self.announcements.append(newAnnounce)
+        }
+    }
     
     var body: some View {
-        Text("Vos annonces")
-        
-        if let announcements = announcements {
-            ForEach(announcements, id: \.id) { announcement in
-                NavigationLink(destination: AnnouncementView()) {
-                    Text("\(announcement.nom)")
+        VStack(alignment: .leading) {
+            Text("Vos annonces")
+            
+            if let announcements = announcements {
+                ForEach(announcements, id: \.id) { announcement in
+                    NavigationLink(destination: AnnouncementView()) {
+                        Text("\(announcement.nom)")
+                    }
                 }
-            }            
+            }
         }
     }
 }
@@ -60,12 +65,14 @@ struct BidderView: View {
     var announcements: [Annonce]?
     
     var body: some View {
-        Text("Vos enchères")
-        
-        if let announcements = announcements {
-            ForEach(announcements, id: \.id) { announcement in
-                NavigationLink(destination: AnnouncementView()) {
-                    Text("\(announcement.nom)")
+        VStack(alignment: .leading) {
+            Text("Vos enchères")
+            
+            if let announcements = announcements {
+                ForEach(announcements, id: \.id) { announcement in
+                    NavigationLink(destination: AnnouncementView()) {
+                        Text("\(announcement.nom)")
+                    }
                 }
             }
         }

@@ -9,22 +9,19 @@ import SwiftUI
 
 struct SignInView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var user: Utilisateur
     
     @State var isSelectionActive: Bool = false
     
     @State var idUser: String = ""
     @State var password: String = ""
     
-     var dismissClosure: (Utilisateur) -> Void
-    
-    init(dismissClosure: @escaping (Utilisateur) -> Void) {
-        self.dismissClosure = dismissClosure
-    }
-    
-    private var fakeUser = Utilisateur(nom: "Stg", prenom: "Geoffrey", mail: "geoffrey.saint-germain@toulouse.miage.fr", mdp: "cc")
+//    private var fakeUser = Utilisateur(nom: "Stg", prenom: "Geoffrey", mail: "geoffrey.saint-germain@toulouse.miage.fr", mdp: "cc")
     
     private func connectUser() {
-        dismissClosure(fakeUser)
+        user.connexion(identifiant: "bg" , nom: "Stg", prenom: "Geoffrey", mail: "geoffrey.saint-germain@toulouse.miage.fr", mdp: "cc")
+        
+//        dismissClosure(fakeUser)
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -35,8 +32,11 @@ struct SignInView: View {
                 .padding(.bottom)
             TextField("Mot de passe", text: $password)
             
-            Button("Connexion") {
+            Button() {
                 connectUser()
+            } label: {
+                Text("Connexion")
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
             .buttonStyle(OrangeButton())
             .padding(.top)
@@ -56,8 +56,6 @@ struct NotSignView: View {
     
     @State var selection: Int? = 0
     
-    var dismissClosure: (Utilisateur) -> Void
-    
     var body: some View {
         NavigationView {
             VStack {                
@@ -65,13 +63,12 @@ struct NotSignView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: SignInView(dismissClosure: { user in
-                    dismissClosure(user)
-                }), tag: 1, selection: $selection) {
+                NavigationLink(destination: SignInView(), tag: 1, selection: $selection) {
                     Button {
                         self.selection = 1
                     } label: {
                         Text("Se connecter")
+                            .frame(minWidth: 0, maxWidth: .infinity)
                     }
                     .buttonStyle(OrangeButton())
                 }
