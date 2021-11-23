@@ -11,43 +11,83 @@ struct NewAnnouncementSheetView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State private var date = Date()
+    @State private var hours: Int = 0
+    @State private var minutes: Int = 5
             
     var dismissClosure: (Annonce) -> Void
     
     @State var announcementName: String = ""
     @State var announcementDescription: String = ""
-    @State var announcementPrice: Double = 0
+    @State var announcementPrice: Double?
     @State var announcementDuration: Int = 500
     @State var announcementLatitude: String?
     @State var announcementLongitude: String?
     
     private func sendAnnouncement() {
-        let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice, duree: announcementDuration, photo: "")
+        // TODO: Check user input
         
-        dismissClosure(newAnnouncement)        
+        announcementDuration = hours*60 + minutes
+        
+        let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice ?? 0, duree: announcementDuration, photo: "")
+        
+        dismissClosure(newAnnouncement)
         dismiss()
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            TextField("Annonce N145", text: $announcementName)
-            TextField("TXT ANNONCE", text: $announcementDescription)
-            TextField("132€", value: $announcementPrice, formatter: NumberFormatter())
+            Text("Créer une annonce")
+                .font(.title)
+                .bold()
+                .padding(.bottom)
             
-            Text("Fixer la date de la fin de l'enchère")
+            TextField("Nom", text: $announcementName)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("Description", text: $announcementDescription)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
             
-            DatePicker(
-                "Start Date",
-                selection: $date,
-                displayedComponents: [.date]
-            )
-                .datePickerStyle(.compact)
+            TextField("Prix", value: $announcementPrice, formatter: NumberFormatter())
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.numberPad)
             
-            Button("Envoyer") {
+            Text("Fixer la durée de l'enchère")
+            
+            HStack {
+                Spacer()
+                VStack {
+                    Picker("", selection: $hours){
+                        ForEach(0..<9, id: \.self) { i in
+                            Text("\(i) heures").tag(i)
+                        }
+                    }
+                    .pickerStyle(WheelPickerStyle())
+                }
+                .frame(width: 100)
+                .clipped()
+                
+                VStack {
+                    Picker("", selection: $minutes){
+                        ForEach(0..<60, id: \.self) { i in
+                            Text("\(i) minutes").tag(i)
+                        }
+                    }
+                    .pickerStyle(WheelPickerStyle())
+                }
+                .frame(width: 100)
+                .clipped()
+                                
+                Spacer()
+            }.padding(.horizontal)
+            
+            Button {
                 sendAnnouncement()
+            } label: {
+                Text("Envoyer")
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
+            
             .buttonStyle(OrangeButton())
         }
+        .padding()
     }
 }

@@ -23,9 +23,8 @@ struct YourAnnouncementsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             AnnouncerView()
-            Divider()
             BidderView()
-        }
+        }.padding()
     }
 }
 
@@ -43,7 +42,9 @@ struct AnnouncerView: View {
             
             List {
                 ForEach(announcements, id: \.id) { announcement in
-                    AnnouncerRowView(announcement: announcement)
+                    NavigationLink(destination: BidAnnouncementView(annonce: announcement)) {
+                        AnnouncerRowView(announcement: announcement)
+                    }
                 }
                 AddAnnouncementRowView(dismissClosure: { announcement in
                     addAnouncement(newAnnouncement: announcement)
@@ -57,6 +58,16 @@ struct AnnouncerRowView: View {
     
     var announcement: Annonce
     
+    @State var timeLeft: Date = Date()
+    
+    init(announcement: Annonce) {
+        self.announcement = announcement
+        
+        let timeIntervalLeft = Date.now.timeIntervalSinceReferenceDate - announcement.dateCreation.addingTimeInterval(Double(announcement.duree)).timeIntervalSinceReferenceDate
+        
+        timeLeft = Date(timeIntervalSinceNow: timeIntervalLeft)
+    }
+        
     var body: some View {
         HStack {
             Image(systemName: "1.square.fill")
@@ -65,10 +76,10 @@ struct AnnouncerRowView: View {
                 HStack {
                     Text(announcement.nom)
                     Spacer()
-//                    Text(\(String(announcement.duree)))
+                    Text(timeLeft, style: .time)
                 }
                 
-                Text("\(announcement.prixPlanche)€")
+                Text("\(announcement.prixPlanche, specifier: "%.2f")€")
             }
         }
     }
@@ -106,7 +117,7 @@ struct BidderView: View {
     init() {
         announcements = []
         
-        let count = 1...10
+        let count = 1...4
         let defaultDuration = 300
         
         for _ in count {
@@ -122,7 +133,9 @@ struct BidderView: View {
             
             List {
                 ForEach(announcements, id: \.id) { announcement in
-                    BidderRow(announcement: announcement)
+                    NavigationLink(destination: BidAnnouncementView(annonce: announcement)) {
+                        BidderRow(announcement: announcement)
+                    }
                 }
             }
         }

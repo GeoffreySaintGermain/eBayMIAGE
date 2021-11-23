@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AAAD75EA274CCEC300858FA0 /* FindAnnouncements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */; };
+		AAAD75EC274CD02B00858FA0 /* BidAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75EB274CD02B00858FA0 /* BidAnnouncementView.swift */; };
 		AAE1D8CB273E7C8400B93028 /* eBayMIAGEApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */; };
 		AAE1D8CF273E7C8900B93028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE1D8CE273E7C8900B93028 /* Assets.xcassets */; };
 		AAE1D8D2273E7C8900B93028 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE1D8D1273E7C8900B93028 /* Preview Assets.xcassets */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAnnouncements.swift; sourceTree = "<group>"; };
+		AAAD75EB274CD02B00858FA0 /* BidAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidAnnouncementView.swift; sourceTree = "<group>"; };
 		AAE1D8C7273E7C8400B93028 /* eBayMIAGE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eBayMIAGE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayMIAGEApp.swift; sourceTree = "<group>"; };
 		AAE1D8CE273E7C8900B93028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 				AAE1D8D8273FE49B00B93028 /* HomeView.swift */,
 				AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */,
 				AAE1D8DA273FE9C300B93028 /* NewAnnouncementView.swift */,
+				AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */,
+				AAAD75EB274CD02B00858FA0 /* BidAnnouncementView.swift */,
 			);
 			path = Announcement;
 			sourceTree = "<group>";
@@ -218,9 +224,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAAD75EC274CD02B00858FA0 /* BidAnnouncementView.swift in Sources */,
 				AAE1D8EC273FF2BD00B93028 /* Enchere.swift in Sources */,
 				AAE1D8DF273FEC5400B93028 /* SignInView.swift in Sources */,
 				AAE1D8EA273FF2A900B93028 /* Utilisateur.swift in Sources */,
+				AAAD75EA274CCEC300858FA0 /* FindAnnouncements.swift in Sources */,
 				AAE1D8F92743944700B93028 /* ProfileView.swift in Sources */,
 				AAE1D8F4274141B000B93028 /* UtilisateurViewModel.swift in Sources */,
 				AAE1D8DB273FE9C300B93028 /* NewAnnouncementView.swift in Sources */,

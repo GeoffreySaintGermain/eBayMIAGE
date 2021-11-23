@@ -19,12 +19,11 @@ struct MainTabView: View {
                         Text("DashBoard")
                     }
                 
-                Text("2")
+                FindAnnouncements()
                     .tabItem {
                         Image(systemName: "1.square.fill")
                         Text("Enchères")
-                    }
-                
+                    }                
                 
                 ProfileView()
                     .tabItem {
