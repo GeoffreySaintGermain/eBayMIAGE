@@ -19,7 +19,9 @@ struct NotSignView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: SignInView(), tag: 1, selection: $selection) {
+                NavigationLink(destination: SignInView(dismissClosure: { user in
+                    self.user.connectUser(user: user)
+                }), tag: 1, selection: $selection) {
                     Button {
                         self.selection = 1
                     } label: {
@@ -30,10 +32,12 @@ struct NotSignView: View {
                 }
                 .padding(.top)
                 
-                NavigationLink(destination: SignUpView()) {
+                NavigationLink(destination: SignUpView(dismissClosure: { user in
+                    self.user.connectUser(user: user)
+                })) {
                     Text("Pas encore inscrit ?")
                 }
-                            
+                 
                 Spacer()
             }
             .padding()

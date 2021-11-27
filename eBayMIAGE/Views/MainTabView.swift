@@ -12,7 +12,7 @@ struct MainTabView: View {
      
     var body: some View {
         TabView{
-            if user.identifiant != "" {
+            if user.isLogged {
                 HomeView()
                     .tabItem {
                         Image(systemName: "1.square.fill")

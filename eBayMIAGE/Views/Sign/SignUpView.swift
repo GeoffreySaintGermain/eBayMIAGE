@@ -18,6 +18,8 @@ struct SignUpView: View {
     @State var mdp: String = ""
     // @State var photo: UIImage?
     
+    var dismissClosure: (Utilisateur) -> Void
+    
     private func inscription() {
         if checkInput() {
             let newUser = Utilisateur(identifiant: identifiant, nom: nom, prenom: prenom, mail: mail, mdp: mdp)
@@ -27,7 +29,7 @@ struct SignUpView: View {
                 
                 UserApi().getUser() { user in
                     user.connectUser(user: user)
-                    print(user.id)
+                    dismissClosure(user)
                     presentationMode.wrappedValue.dismiss()
                 }
             }

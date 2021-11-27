@@ -101,7 +101,6 @@ class UserApi: ObservableObject {
                 
                 let decodedUser = try! JSONDecoder().decode(Utilisateur.self, from: data!)
                 print(decodedUser)
-                print(decodedUser.id)
                 DispatchQueue.main.async {
                     completion(decodedUser)
                 }

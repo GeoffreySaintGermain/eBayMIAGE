@@ -14,6 +14,8 @@ struct SignInView: View {
     @State var idUser: String = ""
     @State var password: String = ""
     
+    var dismissClosure: (Utilisateur) -> Void
+    
     private func connectUser() {
         if checkInput() {
             UserApi().connectUser(idUser: idUser, password: password) { userInformation in
@@ -21,8 +23,7 @@ struct SignInView: View {
                 
                 UserApi().getUser() { user in
                     user.connectUser(user: user)
-                    print(user.id)
-                    user.objectWillChange.send()
+                    dismissClosure(user)
                     presentationMode.wrappedValue.dismiss()
                 }
             }

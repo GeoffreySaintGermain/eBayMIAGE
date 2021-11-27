@@ -11,7 +11,8 @@ import Foundation
 class Utilisateur: Codable, ObservableObject {
     
     // MARK: Attributes
-    @Published var id: Int
+    @Published var uuid: UUID?
+    @Published var id: Int?
     
     @Published var identifiant: String
     @Published var nom: String
@@ -26,8 +27,7 @@ class Utilisateur: Codable, ObservableObject {
     @Published var longitude: String
     
     var isLogged: Bool {
-        print("test")
-        return id != 0
+        id != nil
     }
     
     // MARK: Codable
@@ -75,7 +75,6 @@ class Utilisateur: Codable, ObservableObject {
     // MARK: Constructor
     
     public init(identifiant: String, nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String = "", longitude: String = "") {
-        self.id = 0
         self.date = Date.now
         
         self.identifiant = identifiant
@@ -90,7 +89,6 @@ class Utilisateur: Codable, ObservableObject {
     }
     
     public init() {
-        self.id = 0
         self.identifiant = ""
         self.nom = ""
         self.prenom = ""
@@ -104,7 +102,6 @@ class Utilisateur: Codable, ObservableObject {
     // MARK: Functions
 
     public func connexion(identifiant: String, nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String = "", longitude: String = "") {
-        self.id = 0
         self.date = Date.now
         
         self.identifiant = identifiant
@@ -119,6 +116,7 @@ class Utilisateur: Codable, ObservableObject {
     }
     
     public func connectUser(user: Utilisateur) {
+        self.uuid = UUID()
         self.id = user.id
         self.date = user.date
         
@@ -138,7 +136,7 @@ class Utilisateur: Codable, ObservableObject {
     }
     
     private func emptyUser() {
-        self.id = 0
+        self.id = nil
         
         self.identifiant = ""
         self.nom = ""

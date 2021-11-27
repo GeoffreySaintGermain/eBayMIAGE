@@ -12,7 +12,7 @@ class UtilisateurDataStore: ObservableObject {
      
     /// Singleton
     public static var shared = Utilisateur()
-    
+            
 }
 
 
