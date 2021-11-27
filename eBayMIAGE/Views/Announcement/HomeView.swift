@@ -12,9 +12,11 @@ struct HomeView: View {
     @EnvironmentObject var user: Utilisateur
     
     var body: some View {
-        VStack(alignment: .leading) {
-            YourAnnouncementsView()
-        }                        
+        NavigationView {
+            VStack(alignment: .leading) {
+                YourAnnouncementsView()
+            }
+        }                             
     }
 }
 
@@ -63,7 +65,7 @@ struct AnnouncerRowView: View {
     init(announcement: Annonce) {
         self.announcement = announcement
         
-        let timeIntervalLeft = Date.now.timeIntervalSinceReferenceDate - announcement.dateCreation.addingTimeInterval(Double(announcement.duree)).timeIntervalSinceReferenceDate
+        let timeIntervalLeft = announcement.dateCreation.addingTimeInterval(Double(announcement.duree)).timeIntervalSinceReferenceDate
         
         timeLeft = Date(timeIntervalSinceNow: timeIntervalLeft)
     }
@@ -76,7 +78,7 @@ struct AnnouncerRowView: View {
                 HStack {
                     Text(announcement.nom)
                     Spacer()
-                    Text(timeLeft, style: .time)
+                    Text(timeLeft, style: .timer)
                 }
                 
                 Text("\(announcement.prixPlanche, specifier: "%.2f")€")

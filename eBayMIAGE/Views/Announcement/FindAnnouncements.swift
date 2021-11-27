@@ -24,14 +24,18 @@ struct FindAnnouncements: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Enchères disponibles")
-            
-            List {
-                ForEach(announcements, id: \.id) { announcement in
-                    BidderRow(announcement: announcement)
+        NavigationView {
+            VStack(alignment: .leading) {
+                Text("Enchères disponibles")
+                
+                List {
+                    ForEach(announcements, id: \.id) { announcement in
+                        NavigationLink(destination: BidAnnouncementView(annonce: announcement)) {
+                            BidderRow(announcement: announcement)
+                        }
+                    }
                 }
             }
-        }
+        }        
     }
 }

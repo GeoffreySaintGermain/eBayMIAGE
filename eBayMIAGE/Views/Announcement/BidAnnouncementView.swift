@@ -15,20 +15,23 @@ struct BidAnnouncementView: View {
     var timer = 0
     
     var body: some View {
-        Text("Annonce")
-            .font(.title)
-            .bold()
-        
-        Text("Nom")
-        Text("Description")
-        Text("Prix")
-        
-        
-        if timer == 0 {
-            AnnouncementEndedView(annonce: annonce)
+        VStack(alignment: .leading) {
+            Text("Annonce")
+                .font(.title)
+                .bold()
             
-        } else {
-            AnnouncementStillInProgressView(annonce: annonce)
+            Text("\(annonce.nom)")
+            Text("\(annonce.description)")
+            Text("Prix")
+            
+            
+            if timer == 0 {
+                AnnouncementEndedView(annonce: annonce)
+            } else {
+                AnnouncementStillInProgressView(annonce: annonce)
+            }
+            
+            Spacer()
         }
     }
 }
@@ -64,10 +67,10 @@ struct AnnouncementStillInProgressView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
                 .onReceive(Just(prix)) { newValue in
-                                let filtered = newValue.filter { "0123456789".contains($0) }
-                                if filtered != newValue {
-                                    self.prix = filtered
-                                }
+                    let filtered = newValue.filter { "0123456789".contains($0) }
+                    if filtered != newValue {
+                        self.prix = filtered
+                    }
                 }
             Button {
                 encherir()

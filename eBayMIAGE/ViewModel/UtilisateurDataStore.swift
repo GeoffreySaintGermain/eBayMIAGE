@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
-class UtilisateurViewModel: ObservableObject {
+class UtilisateurDataStore: ObservableObject {
+     
+    /// Singleton
+    public static var shared = Utilisateur()
     
 }
+
+

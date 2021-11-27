@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @StateObject var user: Utilisateur = Utilisateur.shared
-    
+    @StateObject var user: Utilisateur = UtilisateurDataStore.shared
+     
     var body: some View {
         TabView{
-            if user.isLogged {
+            if user.identifiant != "" {
                 HomeView()
                     .tabItem {
                         Image(systemName: "1.square.fill")
