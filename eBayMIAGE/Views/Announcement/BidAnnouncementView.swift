@@ -26,15 +26,15 @@ struct BidAnnouncementView: View {
             Text("\(annonce.description)")
             Text("Prix")
             
-            
-            if timer == 0 {
-                AnnouncementEndedView(annonce: annonce)
-            } else {
-                AnnouncementStillInProgressView(annonce: annonce)
-            }
+            Divider()
+//            if timer == 0 {
+//                AnnouncementEndedView(annonce: annonce)
+//            } else {
+            AnnouncementStillInProgressView(annonce: annonce)
+//            }
             
             Spacer()
-        }
+        }.padding()
     }
 }
 
@@ -55,13 +55,21 @@ struct AnnouncementStillInProgressView: View {
     
     @State var prix: String = "0"
     
+    private func getHistoric() {
+        
+    }
+    
     private func encherir() {
         print("cc jencheri")
     }
     
     var body: some View {
-        VStack {
-            Text("Temps restant")
+        VStack(alignment: .leading, spacing: 10) {            
+            HStack {
+                Spacer()
+                Text("Temps restant")
+                Spacer()
+            }
             
             Text("Enchérir").bold()
             
@@ -78,9 +86,14 @@ struct AnnouncementStillInProgressView: View {
                 encherir()
             } label: {
                 Text("Proposer un prix")
+                    .frame(minWidth: 0, maxWidth: .infinity)
             }
+            .buttonStyle(OrangeButton())
+            .padding(.top)
             
             Text("Liste historique des prix")
+        }.onAppear {
+            getHistoric()
         }
     }
 }

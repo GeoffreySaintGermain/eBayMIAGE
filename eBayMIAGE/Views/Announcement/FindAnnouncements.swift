@@ -11,9 +11,8 @@ struct FindAnnouncements: View {
     
     @State var otherAnnouncementsNotBid: [Annonce] = []
     
-    private func getAnnouncements() {
-        
-        AnnounceAPI().getMyAuctions(completion: { announcements in
+    private func getAnnouncements() {        
+        AuctionAPI().getMyAuctions(completion: { announcements in
             AnnounceAPI().getAnnouncements(completion: { announcements in
                 let otherAnnouncements = announcements.filter({ $0.idUtilisateur != UserInformationDataStore.shared.id })
                 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Enchere: ObservableObject {
+class Enchere: Codable, ObservableObject {
     var prix: Double
     var date: Date
     

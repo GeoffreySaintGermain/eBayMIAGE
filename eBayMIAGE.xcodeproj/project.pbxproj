@@ -11,6 +11,7 @@
 		AA37D3FD27527793009F8E36 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37D3FC27527793009F8E36 /* UserInformation.swift */; };
 		AA37D401275278F7009F8E36 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37D400275278F7009F8E36 /* UserAPI.swift */; };
 		AA37D40327527A55009F8E36 /* UserInformationDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37D40227527A55009F8E36 /* UserInformationDataStore.swift */; };
+		AA8620B82756211700A47FA2 /* AuctionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8620B72756211700A47FA2 /* AuctionAPI.swift */; };
 		AA8E15B2275293200088E962 /* NotSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E15B1275293200088E962 /* NotSignView.swift */; };
 		AA8E15B427529AA90088E962 /* ConnectionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E15B327529AA90088E962 /* ConnectionInformation.swift */; };
 		AAAD75EA274CCEC300858FA0 /* FindAnnouncements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */; };
@@ -27,7 +28,6 @@
 		AAE1D8E7273FF27E00B93028 /* Annonce.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8E6273FF27E00B93028 /* Annonce.swift */; };
 		AAE1D8EA273FF2A900B93028 /* Utilisateur.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8E9273FF2A900B93028 /* Utilisateur.swift */; };
 		AAE1D8EC273FF2BD00B93028 /* Enchere.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8EB273FF2BD00B93028 /* Enchere.swift */; };
-		AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */; };
 		AAE1D8F127412AA300B93028 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F027412AA300B93028 /* Buttons.swift */; };
 		AAE1D8F4274141B000B93028 /* UtilisateurDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F3274141B000B93028 /* UtilisateurDataStore.swift */; };
 		AAE1D8F627438CDD00B93028 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8F527438CDD00B93028 /* MainTabView.swift */; };
@@ -39,6 +39,7 @@
 		AA37D3FC27527793009F8E36 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 		AA37D400275278F7009F8E36 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		AA37D40227527A55009F8E36 /* UserInformationDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationDataStore.swift; sourceTree = "<group>"; };
+		AA8620B72756211700A47FA2 /* AuctionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionAPI.swift; sourceTree = "<group>"; };
 		AA8E15B1275293200088E962 /* NotSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotSignView.swift; sourceTree = "<group>"; };
 		AA8E15B327529AA90088E962 /* ConnectionInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInformation.swift; sourceTree = "<group>"; };
 		AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAnnouncements.swift; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		AAE1D8E6273FF27E00B93028 /* Annonce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annonce.swift; sourceTree = "<group>"; };
 		AAE1D8E9273FF2A900B93028 /* Utilisateur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilisateur.swift; sourceTree = "<group>"; };
 		AAE1D8EB273FF2BD00B93028 /* Enchere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enchere.swift; sourceTree = "<group>"; };
-		AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		AAE1D8F027412AA300B93028 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		AAE1D8F3274141B000B93028 /* UtilisateurDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilisateurDataStore.swift; sourceTree = "<group>"; };
 		AAE1D8F527438CDD00B93028 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -77,8 +77,10 @@
 		AA37D3FE27527871009F8E36 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				AA37D3FA275026F0009F8E36 /* APIUtils.swift */,
 				AA37D400275278F7009F8E36 /* UserAPI.swift */,
 				AADD3857275542BE00DF72BF /* AnnounceAPI.swift */,
+				AA8620B72756211700A47FA2 /* AuctionAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -147,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				AAE1D8D8273FE49B00B93028 /* HomeView.swift */,
-				AAE1D8ED273FF85500B93028 /* AnnouncementView.swift */,
 				AAE1D8DA273FE9C300B93028 /* NewAnnouncementView.swift */,
 				AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */,
 				AAAD75EB274CD02B00858FA0 /* BidAnnouncementView.swift */,
@@ -171,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				AAE1D8F027412AA300B93028 /* Buttons.swift */,
-				AA37D3FA275026F0009F8E36 /* APIUtils.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -281,7 +281,7 @@
 				AA8E15B2275293200088E962 /* NotSignView.swift in Sources */,
 				AADD385A27555DB000DF72BF /* Annonces.swift in Sources */,
 				AA8E15B427529AA90088E962 /* ConnectionInformation.swift in Sources */,
-				AAE1D8EE273FF85500B93028 /* AnnouncementView.swift in Sources */,
+				AA8620B82756211700A47FA2 /* AuctionAPI.swift in Sources */,
 				AAE1D8CB273E7C8400B93028 /* eBayMIAGEApp.swift in Sources */,
 				AAE1D8F627438CDD00B93028 /* MainTabView.swift in Sources */,
 				AA37D3FB275026F0009F8E36 /* APIUtils.swift in Sources */,

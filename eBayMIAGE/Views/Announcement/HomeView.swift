@@ -126,7 +126,7 @@ struct BidderView: View {
     @State var myAuctions: [Annonce] = []
     
     private func getMyAuctions() {
-        AnnounceAPI().getMyAuctions(completion: { annoucements in
+        AuctionAPI().getMyAuctions(completion: { annoucements in
             myAuctions = annoucements
         })
     }
