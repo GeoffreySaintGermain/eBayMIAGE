@@ -15,19 +15,19 @@ struct MainTabView: View {
             if user.isLogged {
                 HomeView()
                     .tabItem {
-                        Image(systemName: "1.square.fill")
+                        Image(systemName: "list.dash")
                         Text("DashBoard")
                     }
                 
                 FindAnnouncements()
                     .tabItem {
-                        Image(systemName: "1.square.fill")
+                        Image(systemName: "plus.circle")
                         Text("Enchères")
                     }                
                 
                 ProfileView()
                     .tabItem {
-                        Image(systemName: "1.square.fill")
+                        Image(systemName: "person")
                         Text("Profil")
                     }
             } else {

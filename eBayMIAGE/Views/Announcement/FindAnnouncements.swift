@@ -8,36 +8,42 @@
 import SwiftUI
 
 struct FindAnnouncements: View {
-    var announcements: [Annonce]
     
-    init() {
-        announcements = []
+    @State var otherAnnouncementsNotBid: [Annonce] = []
+    
+    private func getAnnouncements() {
         
-        let count = 1...4
-        let defaultDuration = 300
+        AnnounceAPI().getMyAuctions(completion: { announcements in
+            AnnounceAPI().getAnnouncements(completion: { announcements in
+                let otherAnnouncements = announcements.filter({ $0.idUtilisateur != UserInformationDataStore.shared.id })
+                
+                otherAnnouncementsNotBid = otherAnnouncements.filter({ otherAnnouncement in
+                    otherAnnouncements.contains(where: { otherAnnouncement.id == $0.id  })
+                })
+            })
+        })
         
-        for _ in count {
-            let newAnnounce = Annonce(nom: "test", description: "descriptionTest", prixPlanche: 10, duree: defaultDuration, photo: "", latitude: "" ,longitude: "")
-            
-            self.announcements.append(newAnnounce)
-        }
+        
     }
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
                 Text("Enchères disponibles")
+                    .padding(.leading)
                 
                 List {
-                    ForEach(announcements, id: \.id) { announcement in
+                    ForEach(otherAnnouncementsNotBid, id: \.id) { announcement in
                         NavigationLink(destination: BidAnnouncementView(annonce: announcement, dismissClosure: {
-                            
+                            getAnnouncements()
                         })) {
                             BidderRow(announcement: announcement)
                         }
                     }
                 }
-            }
+            }.onAppear(perform: {
+                getAnnouncements()
+            })
         }        
     }
 }
