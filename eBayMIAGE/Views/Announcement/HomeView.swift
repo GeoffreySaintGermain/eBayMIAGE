@@ -15,8 +15,10 @@ struct HomeView: View {
         NavigationView {
             VStack(alignment: .leading) {
                 YourAnnouncementsView()
+                Spacer()
             }
-        }                             
+        }
+        .ignoresSafeArea()
     }
 }
 
@@ -26,32 +28,39 @@ struct YourAnnouncementsView: View {
         VStack(alignment: .leading) {
             AnnouncerView()
             BidderView()
-        }.padding()
+        }
     }
 }
 
 struct AnnouncerView: View {
     
-    @State var announcements: [Annonce] = []
+    @State var myAnnouncements: [Annonce] = []
     
-    private func addAnouncement(newAnnouncement: Annonce) {
-        announcements.append(newAnnouncement)
+    private func getAnnouncements() {
+        AnnounceAPI().getAnnouncements(completion: { announcementsApi in
+            myAnnouncements = announcementsApi.filter { $0.idUtilisateur == UserInformationDataStore.shared.id }
+        })
     }
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Vos annonces")
+                .padding(.leading)
             
             List {
-                ForEach(announcements, id: \.id) { announcement in
-                    NavigationLink(destination: BidAnnouncementView(annonce: announcement)) {
+                ForEach(myAnnouncements, id: \.id) { announcement in
+                    NavigationLink(destination: BidAnnouncementView(annonce: announcement, dismissClosure: {
+                        getAnnouncements()
+                    })) {
                         AnnouncerRowView(announcement: announcement)
                     }
                 }
-                AddAnnouncementRowView(dismissClosure: { announcement in
-                    addAnouncement(newAnnouncement: announcement)
+                AddAnnouncementRowView(dismissClosure: {
+                    getAnnouncements()
                 })
             }
+        }.onAppear {
+            getAnnouncements()
         }
     }
 }
@@ -65,9 +74,9 @@ struct AnnouncerRowView: View {
     init(announcement: Annonce) {
         self.announcement = announcement
         
-        let timeIntervalLeft = announcement.dateCreation.addingTimeInterval(Double(announcement.duree)).timeIntervalSinceReferenceDate
-        
-        timeLeft = Date(timeIntervalSinceNow: timeIntervalLeft)
+//        let timeIntervalLeft = announcement.dateCreation.addingTimeInterval(Double(announcement.duree)).timeIntervalSinceReferenceDate
+//
+//        timeLeft = Date(timeIntervalSinceNow: timeIntervalLeft)
     }
         
     var body: some View {
@@ -91,7 +100,7 @@ struct AddAnnouncementRowView: View {
     
     @State private var showingSheet = false
     
-    var dismissClosure: (Annonce) -> Void
+    var dismissClosure: () -> Void
     
     var body: some View {
         HStack {
@@ -105,8 +114,8 @@ struct AddAnnouncementRowView: View {
             showingSheet.toggle()
         }
         .sheet(isPresented: $showingSheet) {
-            NewAnnouncementSheetView(dismissClosure: { announcement in
-                dismissClosure(announcement)
+            NewAnnouncementSheetView(dismissClosure: {
+                dismissClosure()
             })
         }
     }
@@ -114,32 +123,30 @@ struct AddAnnouncementRowView: View {
 
 struct BidderView: View {
     
-    var announcements: [Annonce]
+    @State var myAuctions: [Annonce] = []
     
-    init() {
-        announcements = []
-        
-        let count = 1...4
-        let defaultDuration = 300
-        
-        for _ in count {
-            let newAnnounce = Annonce(nom: "test", description: "descriptionTest", prixPlanche: 10, duree: defaultDuration, photo: "")
-            
-            self.announcements.append(newAnnounce)
-        }
+    private func getMyAuctions() {
+        AnnounceAPI().getMyAuctions(completion: { annoucements in
+            myAuctions = annoucements
+        })
     }
-    
+        
     var body: some View {
         VStack(alignment: .leading) {
             Text("Vos enchères")
+                .padding(.leading)
             
             List {
-                ForEach(announcements, id: \.id) { announcement in
-                    NavigationLink(destination: BidAnnouncementView(annonce: announcement)) {
+                ForEach(myAuctions, id: \.id) { announcement in
+                    NavigationLink(destination: BidAnnouncementView(annonce: announcement, dismissClosure: {
+                        getMyAuctions()
+                    })) {
                         BidderRow(announcement: announcement)
                     }
                 }
             }
+        }.onAppear {
+            getMyAuctions()
         }
     }
 }

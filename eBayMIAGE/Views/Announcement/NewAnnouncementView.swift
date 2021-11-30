@@ -14,7 +14,7 @@ struct NewAnnouncementSheetView: View {
     @State private var hours: Int = 0
     @State private var minutes: Int = 5
             
-    var dismissClosure: (Annonce) -> Void
+    var dismissClosure: () -> Void
     
     @State var announcementName: String = ""
     @State var announcementDescription: String = ""
@@ -24,14 +24,41 @@ struct NewAnnouncementSheetView: View {
     @State var announcementLongitude: String?
     
     private func sendAnnouncement() {
-        // TODO: Check user input
+        if checkInput() {
+            announcementDuration = hours*60 + minutes
+            
+            let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice ?? 0, duree: announcementDuration, photo: "", latitude: "", longitude: "")
+            
+            AnnounceAPI().createAnnouncement(newAnnouncement: newAnnouncement) { isOk in
+                if isOk {
+                    dismissClosure()
+                    dismiss()
+                }
+                else {
+                    print("error")
+                }
+            }
+            
+            
+        }
+    }
+    
+    private func checkInput() -> Bool {
+        var inputIsOk = true
         
-        announcementDuration = hours*60 + minutes
+        if announcementName == "" {
+            inputIsOk = false
+        }
         
-        let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice ?? 0, duree: announcementDuration, photo: "")
+        if announcementDescription == "" {
+            inputIsOk = false
+        }
         
-        dismissClosure(newAnnouncement)
-        dismiss()
+        if announcementPrice == nil || announcementPrice == 0 {
+            inputIsOk = false
+        }
+        
+        return inputIsOk
     }
     
     var body: some View {

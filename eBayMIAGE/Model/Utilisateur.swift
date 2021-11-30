@@ -11,7 +11,6 @@ import Foundation
 class Utilisateur: Codable, ObservableObject {
     
     // MARK: Attributes
-    @Published var uuid: UUID?
     @Published var id: Int?
     
     @Published var identifiant: String
@@ -72,7 +71,7 @@ class Utilisateur: Codable, ObservableObject {
         try container.encode(longitude, forKey: .longitude)
     }
     
-    // MARK: Constructor
+    // MARK: Init
     
     public init(identifiant: String, nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String = "", longitude: String = "") {
         self.date = Date.now
@@ -116,7 +115,6 @@ class Utilisateur: Codable, ObservableObject {
     }
     
     public func connectUser(user: Utilisateur) {
-        self.uuid = UUID()
         self.id = user.id
         self.date = user.date
         

@@ -17,7 +17,7 @@ struct FindAnnouncements: View {
         let defaultDuration = 300
         
         for _ in count {
-            let newAnnounce = Annonce(nom: "test", description: "descriptionTest", prixPlanche: 10, duree: defaultDuration, photo: "")
+            let newAnnounce = Annonce(nom: "test", description: "descriptionTest", prixPlanche: 10, duree: defaultDuration, photo: "", latitude: "" ,longitude: "")
             
             self.announcements.append(newAnnounce)
         }
@@ -30,7 +30,9 @@ struct FindAnnouncements: View {
                 
                 List {
                     ForEach(announcements, id: \.id) { announcement in
-                        NavigationLink(destination: BidAnnouncementView(annonce: announcement)) {
+                        NavigationLink(destination: BidAnnouncementView(annonce: announcement, dismissClosure: {
+                            
+                        })) {
                             BidderRow(announcement: announcement)
                         }
                     }

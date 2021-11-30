@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserApi: ObservableObject {
+class UserApi {
     let apiPathUser = APIUtils.ApiPath + "utilisateurs"
     let apiPathLogin = APIUtils.ApiPath + "login"
         

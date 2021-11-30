@@ -9,8 +9,10 @@ import Combine
 import SwiftUI
 
 struct BidAnnouncementView: View {
-    
+            
     var annonce: Annonce
+    
+    var dismissClosure: () -> Void
     
     var timer = 0
     
