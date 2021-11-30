@@ -1,5 +1,5 @@
 //
-//  BidAnnouncement.swift
+//  BidAnnouncementView.swift
 //  eBayMIAGE
 //
 //  Created by SAINT GERMAIN on 23/11/2021.
@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 struct BidAnnouncementView: View {
-            
+                
     var annonce: Annonce
     
     var dismissClosure: () -> Void
@@ -51,16 +51,48 @@ struct AnnouncementEndedView: View {
 
 struct AnnouncementStillInProgressView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var annonce: Annonce
+    
+    @State var historic: [Enchere] = []
     
     @State var prix: String = "0"
     
     private func getHistoric() {
-        
+        AuctionAPI().getHistoricAuctions(annonce: annonce, completion: { auctions in
+            historic = auctions
+        })
     }
     
     private func encherir() {
-        print("cc jencheri")
+        let prixDouble = Double(prix) ?? 0.0
+        
+        if checkInput(prixDouble: prixDouble) {
+            
+            let newAuction = Enchere(prix: Double(prix) ?? 0.0)
+            
+            AuctionAPI().bidOnAnnoucement(auction: newAuction, announcement: annonce, completion: { isOk in
+                if isOk {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                else {
+                    print("error")
+                }
+            })
+        } else {
+            print("error input")
+        }
+    }
+    
+    private func checkInput(prixDouble: Double) -> Bool {
+        var inputIsOk = true
+        
+        if  prixDouble == 0.0 || (historic.count == 0 && historic.contains(where: { $0.prix > prixDouble })) {
+            inputIsOk = false
+        }
+        
+        return inputIsOk
     }
     
     var body: some View {

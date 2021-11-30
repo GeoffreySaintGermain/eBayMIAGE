@@ -11,8 +11,8 @@ class Enchere: Codable, ObservableObject {
     var prix: Double
     var date: Date
     
-    init(prix: Double, date: Date) {
+    init(prix: Double) {
         self.prix = prix
-        self.date = date
+        self.date = Date.now
     }
 }

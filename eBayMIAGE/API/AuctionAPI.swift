@@ -10,9 +10,7 @@ import Foundation
 class AuctionAPI {
     
     let apiPathAuction = APIUtils.ApiPath + "enchere/annonces/"
-    
-    
-    
+            
     func getMyAuctions(completion: @escaping ([Annonce]) -> ()) {
         let apiPathMyAuction = apiPathAuction + "utilisateurs/\(UserInformationDataStore.shared.id)"
         
@@ -31,11 +29,14 @@ class AuctionAPI {
             URLSession.shared.dataTask(with: request) { data, response, error in
                 
                 guard let data = data else {
-                    print("error while fetching data")
+                    print("error no data")
                     return
                 }
                 
                 do {
+                    let str = String(decoding: data, as: UTF8.self)
+                    print(str)
+                    
                     let decodedAnnouncements = try JSONDecoder().decode([Annonce].self, from: data)
                     print(decodedAnnouncements)
                     DispatchQueue.main.async {
@@ -51,8 +52,8 @@ class AuctionAPI {
         }
     }
     
-    func getHistoricAuctions(completion: @escaping ([Enchere]) -> ()) {
-        let apiPathHistoric = "apiPathAuction\(UserInformationDataStore.shared.id)"
+    func getHistoricAuctions(annonce: Annonce, completion: @escaping ([Enchere]) -> ()) {
+        let apiPathHistoric = "apiPathAuction\(annonce.id)"
         
         if UserInformationDataStore.shared.informationFilled {
             
@@ -89,5 +90,40 @@ class AuctionAPI {
         }
     }
     
-    
+    func bidOnAnnoucement(auction: Enchere, announcement: Annonce, completion: @escaping (Bool) -> ()) {
+        let apiPathBidAnnouncement = "\(apiPathAuction)\(announcement.id)/utilisateurs/\(UserInformationDataStore.shared.id)"
+        
+        guard let url = URL(string: apiPathBidAnnouncement) else {
+            print("invalid url")
+            return
+        }
+        
+        guard let httpBody = try? JSONEncoder().encode(auction) else {
+            print("Failed to encode user")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(UserInformationDataStore.shared.token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.httpBody = httpBody
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print("no data")
+                return
+            }
+            let str = String(decoding: data, as: UTF8.self)
+            print(str)
+            
+            DispatchQueue.main.async {
+                if error == nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+            }
+        }.resume()
+    }
 }

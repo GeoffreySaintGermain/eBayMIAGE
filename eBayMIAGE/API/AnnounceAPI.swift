@@ -65,14 +65,14 @@ class AnnounceAPI {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(UserInformationDataStore.shared.token)", forHTTPHeaderField: "Authorization")
         request.httpMethod = "POST"
-        request.httpBody = httpBody        
+        request.httpBody = httpBody
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if error == nil {
                 completion(false)
             } else {
                 completion(true)
-            }            
+            }
         }.resume()
-    }
+    }    
 }
