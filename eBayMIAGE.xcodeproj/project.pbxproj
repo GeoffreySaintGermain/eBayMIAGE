@@ -15,7 +15,7 @@
 		AA8E15B2275293200088E962 /* NotSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E15B1275293200088E962 /* NotSignView.swift */; };
 		AA8E15B427529AA90088E962 /* ConnectionInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E15B327529AA90088E962 /* ConnectionInformation.swift */; };
 		AAAD75EA274CCEC300858FA0 /* FindAnnouncements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */; };
-		AAAD75EC274CD02B00858FA0 /* BidAnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75EB274CD02B00858FA0 /* BidAnnouncementView.swift */; };
+		AAAD75EC274CD02B00858FA0 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75EB274CD02B00858FA0 /* AnnouncementView.swift */; };
 		AADD3858275542BE00DF72BF /* AnnounceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3857275542BE00DF72BF /* AnnounceAPI.swift */; };
 		AAE1D8CB273E7C8400B93028 /* eBayMIAGEApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */; };
 		AAE1D8CF273E7C8900B93028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE1D8CE273E7C8900B93028 /* Assets.xcassets */; };
@@ -42,7 +42,7 @@
 		AA8E15B1275293200088E962 /* NotSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotSignView.swift; sourceTree = "<group>"; };
 		AA8E15B327529AA90088E962 /* ConnectionInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInformation.swift; sourceTree = "<group>"; };
 		AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAnnouncements.swift; sourceTree = "<group>"; };
-		AAAD75EB274CD02B00858FA0 /* BidAnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidAnnouncementView.swift; sourceTree = "<group>"; };
+		AAAD75EB274CD02B00858FA0 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		AADD3857275542BE00DF72BF /* AnnounceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceAPI.swift; sourceTree = "<group>"; };
 		AAE1D8C7273E7C8400B93028 /* eBayMIAGE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eBayMIAGE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayMIAGEApp.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				AAE1D8D8273FE49B00B93028 /* HomeView.swift */,
 				AAE1D8DA273FE9C300B93028 /* NewAnnouncementView.swift */,
 				AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */,
-				AAAD75EB274CD02B00858FA0 /* BidAnnouncementView.swift */,
+				AAAD75EB274CD02B00858FA0 /* AnnouncementView.swift */,
 			);
 			path = Announcement;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 			files = (
 				AA37D3FD27527793009F8E36 /* UserInformation.swift in Sources */,
 				AADD3858275542BE00DF72BF /* AnnounceAPI.swift in Sources */,
-				AAAD75EC274CD02B00858FA0 /* BidAnnouncementView.swift in Sources */,
+				AAAD75EC274CD02B00858FA0 /* AnnouncementView.swift in Sources */,
 				AAE1D8EC273FF2BD00B93028 /* Enchere.swift in Sources */,
 				AAE1D8DF273FEC5400B93028 /* SignInView.swift in Sources */,
 				AAE1D8EA273FF2A900B93028 /* Utilisateur.swift in Sources */,

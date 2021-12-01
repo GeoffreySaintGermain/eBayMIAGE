@@ -20,10 +20,10 @@ class Utilisateur: Codable, ObservableObject {
     @Published var mdp: String
     @Published var photo: String?
     
-    @Published var date: Date?
-    
     @Published var latitude: String
     @Published var longitude: String
+    
+    // MARK: Computed properties
     
     var isLogged: Bool {
         id != nil
@@ -66,7 +66,6 @@ class Utilisateur: Codable, ObservableObject {
         try container.encode(mail, forKey: .mail)
         try container.encode(mdp, forKey: .mdp)
         try container.encode(photo, forKey: .photo)
-        try container.encode(date, forKey: .date)
         try container.encode(latitude, forKey: .latitude)
         try container.encode(longitude, forKey: .longitude)
     }
@@ -74,8 +73,6 @@ class Utilisateur: Codable, ObservableObject {
     // MARK: Init
     
     public init(identifiant: String, nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String = "", longitude: String = "") {
-        self.date = Date.now
-        
         self.identifiant = identifiant
         self.nom = nom
         self.prenom = prenom
@@ -86,6 +83,8 @@ class Utilisateur: Codable, ObservableObject {
         self.longitude = longitude
         self.photo = ".jpg"
     }
+    
+    // MARK: Init
     
     public init() {
         self.identifiant = ""
@@ -101,8 +100,6 @@ class Utilisateur: Codable, ObservableObject {
     // MARK: Functions
 
     public func connexion(identifiant: String, nom: String, prenom: String, mail: String, mdp: String, photo: String? = nil, latitude: String = "", longitude: String = "") {
-        self.date = Date.now
-        
         self.identifiant = identifiant
         self.nom = nom
         self.prenom = prenom
@@ -116,8 +113,6 @@ class Utilisateur: Codable, ObservableObject {
     
     public func connectUser(user: Utilisateur) {
         self.id = user.id
-        self.date = user.date
-        
         self.identifiant = user.identifiant
         self.nom = user.nom
         self.prenom = user.prenom

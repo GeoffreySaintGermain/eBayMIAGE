@@ -49,7 +49,7 @@ struct AnnouncerView: View {
             
             List {
                 ForEach(myAnnouncements, id: \.id) { announcement in
-                    NavigationLink(destination: BidAnnouncementView(annonce: announcement, dismissClosure: {
+                    NavigationLink(destination: AnnouncementView(annonce: announcement, dismissClosure: {
                         getAnnouncements()
                     })) {
                         AnnouncerRowView(announcement: announcement)
@@ -138,7 +138,7 @@ struct BidderView: View {
             
             List {
                 ForEach(myAuctions, id: \.id) { announcement in
-                    NavigationLink(destination: BidAnnouncementView(annonce: announcement, dismissClosure: {
+                    NavigationLink(destination: AnnouncementView(annonce: announcement, dismissClosure: {
                         getMyAuctions()
                     })) {
                         BidderRow(announcement: announcement)

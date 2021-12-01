@@ -26,6 +26,19 @@ class Annonce: Codable, ObservableObject {
     
     var idUtilisateur: Int?
     
+    // MARK: Computed property
+    
+    var dateFormatted: Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let dateFormatted = dateFormatter.date(from: dateCreation) else {
+            return Date.now
+        }
+        
+        return dateFormatted
+    }
+    
     // MARK: Codable
     
     enum CodingKeys: CodingKey {

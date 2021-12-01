@@ -52,8 +52,8 @@ class AuctionAPI {
         }
     }
     
-    func getHistoricAuctions(annonce: Annonce, completion: @escaping ([Enchere]) -> ()) {
-        let apiPathHistoric = "apiPathAuction\(annonce.id)"
+    func getHistoricAuctions(annonceId: Int, completion: @escaping ([Enchere]) -> ()) {
+        let apiPathHistoric = "\(apiPathAuction)\(annonceId)"
         
         if UserInformationDataStore.shared.informationFilled {
             
@@ -68,11 +68,16 @@ class AuctionAPI {
             request.setValue("Bearer \(UserInformationDataStore.shared.token)", forHTTPHeaderField: "Authorization")
             
             URLSession.shared.dataTask(with: request) { data, response, error in
-                
                 guard let data = data else {
-                    print("error while fetching data")
+                    print("error no data historic")
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
                     return
                 }
+                                
+                let str = String(decoding: data, as: UTF8.self)
+                print(str)
                 
                 do {
                     let decodedAuctions = try JSONDecoder().decode([Enchere].self, from: data)

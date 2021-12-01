@@ -11,7 +11,7 @@ struct FindAnnouncements: View {
     
     @State var otherAnnouncementsNotBid: [Annonce] = []
     
-    private func getAnnouncements() {        
+    private func getAnnouncements() {
         AuctionAPI().getMyAuctions(completion: { announcements in
             AnnounceAPI().getAnnouncements(completion: { announcements in
                 let otherAnnouncements = announcements.filter({ $0.idUtilisateur != UserInformationDataStore.shared.id })
@@ -33,7 +33,7 @@ struct FindAnnouncements: View {
                 
                 List {
                     ForEach(otherAnnouncementsNotBid, id: \.id) { announcement in
-                        NavigationLink(destination: BidAnnouncementView(annonce: announcement, dismissClosure: {
+                        NavigationLink(destination: AnnouncementView(annonce: announcement, dismissClosure: {
                             getAnnouncements()
                         })) {
                             BidderRow(announcement: announcement)
