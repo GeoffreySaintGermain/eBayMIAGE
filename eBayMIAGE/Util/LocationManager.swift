@@ -30,5 +30,45 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         print("error:: (error)")        
     }
     
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
+    func convertLatLongToAddress(latitude: Double, longitude: Double, completion: @escaping (CLPlacemark) -> ()) {
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+            
+            // Place details
+            guard let placeMark = placemarks?[0] else {
+                print("find no placemarks")
+                print(error?.localizedDescription ?? "")
+                return
+            }
+            
+            // Location name
+            if let locationName = placeMark.location {
+                print(locationName)
+            }
+            // Street address
+            if let street = placeMark.thoroughfare {
+                print(street)
+            }
+            // City
+            if let city = placeMark.locality {
+                print(city)
+            }
+            // State
+            if let state = placeMark.administrativeArea {
+                print(state)
+            }
+            // Zip code
+            if let zipCode = placeMark.postalCode {
+                print(zipCode)
+            }
+            // Country
+            if let country = placeMark.country {
+                print(country)
+            }
+            
+            completion(placeMark)
+        })        
+    }
+    
 }

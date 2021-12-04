@@ -106,6 +106,8 @@ class Annonce: Codable, ObservableObject {
         self.etat = .active
         self.duree = duree
         self.photo = photo
+        self.longitude = longitude
+        self.latitude = latitude
     }
     
     // MARK: Enum

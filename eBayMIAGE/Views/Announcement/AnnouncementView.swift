@@ -6,15 +6,36 @@
 //
 
 import Combine
+import CoreLocation
 import SwiftUI
 
 struct AnnouncementView: View {
                 
     var announcement: Annonce
     
+    @EnvironmentObject var locationManager: LocationManager
+    
     var dismissClosure: () -> Void
     
     var timer = 0
+    @State var placemark: CLPlacemark?
+    
+    private func getGeoLocalisation() {
+        guard let longitude = Double(announcement.longitude ?? "") else {
+            print("error get longitude")
+            return
+        }
+        
+        guard let latitude = Double(announcement.latitude ?? "") else {
+            print("error get latitude")
+            return
+        }
+        
+        locationManager.convertLatLongToAddress(latitude: latitude, longitude: longitude) { placemark in
+            self.placemark = placemark
+            
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,6 +46,7 @@ struct AnnouncementView: View {
             Text("\(announcement.nom)")
             Text("\(announcement.description)")
             Text("Prix initial : \(announcement.prixPlanche, specifier: "%2.f")")
+            Text("Ville de l'annonce: \(self.placemark?.locality ?? "pas de ville")")
             
             Divider()
             
@@ -35,7 +57,11 @@ struct AnnouncementView: View {
             }
                         
             Spacer()
-        }.padding()
+        }
+        .onAppear {
+            getGeoLocalisation()
+        }
+        .padding()
     }
 }
 

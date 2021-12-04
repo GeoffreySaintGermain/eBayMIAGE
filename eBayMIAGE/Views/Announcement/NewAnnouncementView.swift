@@ -10,6 +10,7 @@ import SwiftUI
 struct NewAnnouncementSheetView: View {
     
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var locationManager: LocationManager
     
     @State private var hours: Int = 0
     @State private var minutes: Int = 5
@@ -23,11 +24,11 @@ struct NewAnnouncementSheetView: View {
     @State var announcementLatitude: String?
     @State var announcementLongitude: String?
     
-    private func sendAnnouncement() {
+    private func sendAnnouncement() {        
         if checkInput() {
             announcementDuration = hours*60 + minutes
             
-            let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice ?? 0, duree: announcementDuration, photo: "", latitude: "", longitude: "")
+            let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice ?? 0, duree: announcementDuration, photo: "", latitude: "\(locationManager.location?.latitude ?? 0)", longitude: "\(locationManager.location?.longitude ?? 0)")
             
             AnnounceAPI().createAnnouncement(newAnnouncement: newAnnouncement) { isOk in
                 if isOk {
