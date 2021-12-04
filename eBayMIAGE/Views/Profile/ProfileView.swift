@@ -23,28 +23,29 @@ struct UserInformationView: View {
     @EnvironmentObject var user: Utilisateur
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Spacer()
             
-            VStack(alignment: .center) {
-                Text("\(user.prenom) \(user.nom)")
+            HStack(alignment: .center) {
                 Text("photo ici")
             }
             
-            Spacer()
+            Divider()
             
-            VStack(alignment: .leading) {
-                Text("\(user.mail)")
+            Group {
                 Text("\(user.identifiant)")
+                Text("\(user.prenom) \(user.nom)")
+                Text("\(user.mail)")
             }
-            
+                       
+            Divider()
             Spacer()
             
             DeconnectionButtonView()
                 .padding()
-                
+            
             Spacer()
-        }
+        }.padding()
     }
 }
 

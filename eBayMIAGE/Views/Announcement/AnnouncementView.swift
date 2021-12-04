@@ -45,8 +45,17 @@ struct AnnouncementView: View {
             
             Text("\(announcement.nom)")
             Text("\(announcement.description)")
-            Text("Prix initial : \(announcement.prixPlanche, specifier: "%2.f")")
-            Text("Ville de l'annonce: \(self.placemark?.locality ?? "pas de ville")")
+            Text("Prix initial : \(announcement.prixPlanche, specifier: "%2.f")€")
+            Group {
+                Text("Lieu l'annonce :")
+                if let placemark = self.placemark {
+                    Text("\t\(placemark.locality ?? "Ville inconnu")")
+                    Text("\t\(placemark.postalCode ?? "Code Postal inconnu")")
+                    Text("\t\(placemark.country ?? "Pays inconnu")")
+                } else {
+                    Text("Emplacement inconnu")
+                }
+            }
             
             Divider()
             
@@ -80,13 +89,24 @@ struct AnnouncementEndedView: View {
     var body: some View {
         VStack {
             if let winner = winner {
-                Text("Gagnant de l'enchère")
-                Text("\(winner.nom), \(winner.prenom)")
+                WinnerView(winner: winner)
             } else {
                 Text("Aucun gagnant lors de cette enchère")
             }
         }.onAppear {
             getWinner()
+        }
+    }
+}
+
+struct WinnerView: View {
+    
+    @State var winner: Utilisateur
+    
+    var body: some View {
+        VStack {
+            Text("Gagnant de l'enchère")
+            Text("\(winner.nom), \(winner.prenom)")                        
         }
     }
 }
