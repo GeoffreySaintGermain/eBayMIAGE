@@ -141,30 +141,40 @@ struct AnnouncementStillInProgressView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Spacer()
-                Text("Temps restant")
+                if announcement.endDate > Date.now {
+                    Text(announcement.endDate, style: .timer)
+                } else {
+                    Text("Enchère terminée")
+                }
                 Spacer()
             }
             
-            Text("Enchérir").bold()
+            if announcement.idUtilisateur != UserInformationDataStore.shared.id {
             
-            TextField("Prix de la nouvelle enchère", text: $prix)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
-                .onReceive(Just(prix)) { newValue in
-                    let filtered = newValue.filter { "0123456789".contains($0) }
-                    if filtered != newValue {
-                        self.prix = filtered
+                Text("Enchérir").bold()
+                
+                TextField("Prix de la nouvelle enchère", text: $prix)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                    .onReceive(Just(prix)) { newValue in
+                        let filtered = newValue.filter { "0123456789".contains($0) }
+                        if filtered != newValue {
+                            self.prix = filtered
+                        }
                     }
-                }
-            Button {
-                encherir()
-            } label: {
-                Text("Proposer un prix")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-            }
-            .buttonStyle(OrangeButton())
-            .padding(.top)
             
+            
+                Button {
+                    encherir()
+                } label: {
+                    Text("Proposer un prix")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                }
+                .buttonStyle(OrangeButton())
+                .padding(.top)
+            }
+            
+            Divider()
             Text("Liste historique des prix")
             
             List {
