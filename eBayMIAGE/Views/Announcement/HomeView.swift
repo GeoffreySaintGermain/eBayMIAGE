@@ -49,7 +49,7 @@ struct AnnouncerView: View {
             
             List {
                 ForEach(myAnnouncements, id: \.id) { announcement in
-                    NavigationLink(destination: AnnouncementView(annonce: announcement, dismissClosure: {
+                    NavigationLink(destination: AnnouncementView(announcement: announcement, dismissClosure: {
                         getAnnouncements()
                     })) {
                         AnnouncerRowView(announcement: announcement)
@@ -69,16 +69,6 @@ struct AnnouncerRowView: View {
     
     var announcement: Annonce
     
-    @State var timeLeft: Date = Date()
-    
-    init(announcement: Annonce) {
-        self.announcement = announcement
-        
-//        let timeIntervalLeft = announcement.dateCreation.addingTimeInterval(Double(announcement.duree)).timeIntervalSinceReferenceDate
-//
-//        timeLeft = Date(timeIntervalSinceNow: timeIntervalLeft)
-    }
-        
     var body: some View {
         HStack {
             Image(systemName: "1.square.fill")
@@ -87,7 +77,11 @@ struct AnnouncerRowView: View {
                 HStack {
                     Text(announcement.nom)
                     Spacer()
-                    Text(timeLeft, style: .timer)
+                    if announcement.endDate > Date.now {
+                        Text(announcement.endDate, style: .timer)
+                    } else {
+                        Text("Enchère terminée")
+                    }
                 }
                 
                 Text("\(announcement.prixPlanche, specifier: "%.2f")€")
@@ -138,7 +132,7 @@ struct BidderView: View {
             
             List {
                 ForEach(myAuctions, id: \.id) { announcement in
-                    NavigationLink(destination: AnnouncementView(annonce: announcement, dismissClosure: {
+                    NavigationLink(destination: AnnouncementView(announcement: announcement, dismissClosure: {
                         getMyAuctions()
                     })) {
                         BidderRow(announcement: announcement)
@@ -163,7 +157,11 @@ struct BidderRow: View {
                 HStack {
                     Text(announcement.nom)
                     Spacer()
-                    Text("durée")
+                    if announcement.endDate > Date.now {
+                        Text(announcement.endDate, style: .timer)
+                    } else {
+                        Text("Enchère terminée")
+                    }                    
                 }
                 
                 Text("prix")

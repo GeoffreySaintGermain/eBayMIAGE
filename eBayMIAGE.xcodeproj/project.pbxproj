@@ -17,6 +17,7 @@
 		AAAD75EA274CCEC300858FA0 /* FindAnnouncements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */; };
 		AAAD75EC274CD02B00858FA0 /* AnnouncementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAD75EB274CD02B00858FA0 /* AnnouncementView.swift */; };
 		AADD3858275542BE00DF72BF /* AnnounceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADD3857275542BE00DF72BF /* AnnounceAPI.swift */; };
+		AAE12A80275C107D00DB8CB9 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE12A7F275C107D00DB8CB9 /* LocationManager.swift */; };
 		AAE1D8CB273E7C8400B93028 /* eBayMIAGEApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */; };
 		AAE1D8CF273E7C8900B93028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE1D8CE273E7C8900B93028 /* Assets.xcassets */; };
 		AAE1D8D2273E7C8900B93028 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE1D8D1273E7C8900B93028 /* Preview Assets.xcassets */; };
@@ -44,6 +45,8 @@
 		AAAD75E9274CCEC300858FA0 /* FindAnnouncements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAnnouncements.swift; sourceTree = "<group>"; };
 		AAAD75EB274CD02B00858FA0 /* AnnouncementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementView.swift; sourceTree = "<group>"; };
 		AADD3857275542BE00DF72BF /* AnnounceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceAPI.swift; sourceTree = "<group>"; };
+		AAE12A7F275C107D00DB8CB9 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		AAE12A81275C13F900DB8CB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AAE1D8C7273E7C8400B93028 /* eBayMIAGE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eBayMIAGE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eBayMIAGEApp.swift; sourceTree = "<group>"; };
 		AAE1D8CE273E7C8900B93028 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 		AAE1D8C9273E7C8400B93028 /* eBayMIAGE */ = {
 			isa = PBXGroup;
 			children = (
+				AAE12A81275C13F900DB8CB9 /* Info.plist */,
 				AAE1D8CA273E7C8400B93028 /* eBayMIAGEApp.swift */,
 				AAE1D8EF27412A9300B93028 /* Util */,
 				AA37D3FE27527871009F8E36 /* API */,
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				AAE1D8F027412AA300B93028 /* Buttons.swift */,
+				AAE12A7F275C107D00DB8CB9 /* LocationManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				AAE1D8DF273FEC5400B93028 /* SignInView.swift in Sources */,
 				AAE1D8EA273FF2A900B93028 /* Utilisateur.swift in Sources */,
 				AAAD75EA274CCEC300858FA0 /* FindAnnouncements.swift in Sources */,
+				AAE12A80275C107D00DB8CB9 /* LocationManager.swift in Sources */,
 				AA37D40327527A55009F8E36 /* UserInformationDataStore.swift in Sources */,
 				AAE1D8F92743944700B93028 /* ProfileView.swift in Sources */,
 				AAE1D8F4274141B000B93028 /* UtilisateurDataStore.swift in Sources */,
@@ -417,6 +423,7 @@
 				DEVELOPMENT_TEAM = QQR8XPJ799;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = eBayMIAGE/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -448,6 +455,7 @@
 				DEVELOPMENT_TEAM = QQR8XPJ799;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = eBayMIAGE/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

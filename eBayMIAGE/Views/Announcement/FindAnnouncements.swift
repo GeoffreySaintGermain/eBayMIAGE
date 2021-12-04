@@ -33,7 +33,7 @@ struct FindAnnouncements: View {
                 
                 List {
                     ForEach(otherAnnouncementsNotBid, id: \.id) { announcement in
-                        NavigationLink(destination: AnnouncementView(annonce: announcement, dismissClosure: {
+                        NavigationLink(destination: AnnouncementView(announcement: announcement, dismissClosure: {
                             getAnnouncements()
                         })) {
                             BidderRow(announcement: announcement)

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AnnouncementView: View {
                 
-    var annonce: Annonce
+    var announcement: Annonce
     
     var dismissClosure: () -> Void
     
@@ -22,19 +22,18 @@ struct AnnouncementView: View {
                 .font(.title)
                 .bold()
             
-            Text("\(annonce.nom)")
-            Text("\(annonce.description)")
-            Text("Prix")
+            Text("\(announcement.nom)")
+            Text("\(announcement.description)")
+            Text("Prix initial : \(announcement.prixPlanche, specifier: "%2.f")")
             
             Divider()
-//            if timer == 0 {
-//                AnnouncementEndedView(annonce: annonce)
-//            } else {
-            AnnouncementStillInProgressView(annonce: annonce)
-//            }
             
-
-            
+            if announcement.endDate <= Date.now {
+                AnnouncementEndedView(announcement: announcement)
+            } else {
+                AnnouncementStillInProgressView(announcement: announcement)
+            }
+                        
             Spacer()
         }.padding()
     }
@@ -42,12 +41,27 @@ struct AnnouncementView: View {
 
 struct AnnouncementEndedView: View {
     
-    var annonce: Annonce
+    var announcement: Annonce
+    
+    @State var winner: Utilisateur?
+    
+    private func getWinner() {
+        AuctionAPI().getWinner(announce: announcement) { user in
+            winner = user
+        }
+    }
     
     var body: some View {
-        Text("nom, prénom gagnant")
-        
-        Text("Fixer un créneau")
+        VStack {
+            if let winner = winner {
+                Text("Gagnant de l'enchère")
+                Text("\(winner.nom), \(winner.prenom)")
+            } else {
+                Text("Aucun gagnant lors de cette enchère")
+            }
+        }.onAppear {
+            getWinner()
+        }
     }
 }
 
@@ -55,14 +69,14 @@ struct AnnouncementStillInProgressView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    var annonce: Annonce
+    var announcement: Annonce
     
     @State var historic: [Enchere] = []
     
     @State var prix: String = "0"
     
     private func getHistoric() {
-        AuctionAPI().getHistoricAuctions(annonceId: annonce.id, completion: { auctions in
+        AuctionAPI().getHistoricAuctions(annonceId: announcement.id, completion: { auctions in
             historic = auctions
         })
     }
@@ -74,7 +88,7 @@ struct AnnouncementStillInProgressView: View {
             
             let newAuction = Enchere(prix: Double(prix) ?? 0.0)
             
-            AuctionAPI().bidOnAnnoucement(auction: newAuction, announcement: annonce, completion: { isOk in
+            AuctionAPI().bidOnAnnoucement(auction: newAuction, announcement: announcement, completion: { isOk in
                 if isOk {
                     presentationMode.wrappedValue.dismiss()
                 }

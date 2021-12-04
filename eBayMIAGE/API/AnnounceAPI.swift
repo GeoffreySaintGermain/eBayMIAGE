@@ -69,10 +69,10 @@ class AnnounceAPI {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if error == nil {
-                completion(false)
-            } else {
                 completion(true)
+            } else {
+                completion(false)
             }
         }.resume()
-    }    
+    }        
 }

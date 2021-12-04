@@ -131,4 +131,41 @@ class AuctionAPI {
             }
         }.resume()
     }
+    
+    public func getWinner(announce: Annonce, completion: @escaping (Utilisateur) -> () ) {
+        let apiPathWinner = "\(apiPathAuction)\(announce.id)/utilisateurs"
+        
+        
+        guard let url = URL(string: apiPathWinner) else {
+            print("invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(UserInformationDataStore.shared.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            guard let data = data else {
+                print("error while fetching data")
+                return
+            }
+            
+            let str = String(decoding: data, as: UTF8.self)
+            print(str)
+            
+            do {
+                let decodedUser = try JSONDecoder().decode(Utilisateur.self, from: data)
+                print(decodedUser)
+                DispatchQueue.main.async {
+                    completion(decodedUser)
+                }
+            } catch {
+                print("error in decoding json")
+            }
+            
+        }.resume()
+    }
 }

@@ -10,9 +10,17 @@ import SwiftUI
 
 @main
 struct eBayMIAGEApp: App {
+    
+    @ObservedObject var locationManager = LocationManager()
+    
+    init() {
+        locationManager.requestLocation()
+    }
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .environmentObject(locationManager)
         }
     }
 }

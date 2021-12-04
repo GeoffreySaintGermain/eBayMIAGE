@@ -11,6 +11,8 @@ struct SignUpView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var user: Utilisateur
     
+    @EnvironmentObject var locationManager: LocationManager
+        
     @State var identifiant: String = ""
     @State var nom: String = ""
     @State var prenom: String = ""
@@ -22,11 +24,14 @@ struct SignUpView: View {
     
     private func inscription() {
         if checkInput() {
-            let newUser = Utilisateur(identifiant: identifiant, nom: nom, prenom: prenom, mail: mail, mdp: mdp)
+            locationManager.requestLocation()
+            locationManager.requestLocation()
+            
+            let newUser = Utilisateur(identifiant: identifiant, nom: nom, prenom: prenom, mail: mail, mdp: mdp, latitude: "\(locationManager.location?.latitude ?? 0)", longitude: "\(locationManager.location?.longitude ?? 0)")
             
             UserApi().signUpUser(user: newUser) { userInformation in
                 UserInformationDataStore.shared = userInformation
-                
+
                 UserApi().getUser() { user in
                     user.connectUser(user: user)
                     dismissClosure(user)
