@@ -12,22 +12,34 @@ struct SignUpView: View {
     @EnvironmentObject var user: Utilisateur
     
     @EnvironmentObject var locationManager: LocationManager
+    
+    @State private var inputImage: UIImage?
+    @State private var showingImagePicker = false
         
     @State var identifiant: String = ""
     @State var nom: String = ""
     @State var prenom: String = ""
     @State var mail: String = ""
     @State var mdp: String = ""
-    // @State var photo: UIImage?
+    @State var image: Image?
+    
     
     var dismissClosure: (Utilisateur) -> Void
     
     private func inscription() {
         if checkInput() {
             locationManager.requestLocation()
-            locationManager.requestLocation()
             
-            let newUser = Utilisateur(identifiant: identifiant, nom: nom, prenom: prenom, mail: mail, mdp: mdp, latitude: "\(locationManager.location?.latitude ?? 0)", longitude: "\(locationManager.location?.longitude ?? 0)")
+            var photo: String = ""
+            
+            if let inputImage = inputImage {
+                photo = inputImage
+                    .jpegData(compressionQuality: 0)?
+                    .base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters) ?? ""
+            }
+            
+            
+            let newUser = Utilisateur(identifiant: identifiant, nom: nom, prenom: prenom, mail: mail, mdp: mdp, photo: photo, latitude: "\(locationManager.location?.latitude ?? 0)", longitude: "\(locationManager.location?.longitude ?? 0)")
             
             UserApi().signUpUser(user: newUser) { userInformation in
                 UserInformationDataStore.shared = userInformation
@@ -67,40 +79,61 @@ struct SignUpView: View {
         return inputIsOk
     }
     
+    private func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
+    }
+    
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
-            TextField("Identifiant", text: $identifiant)
-                .padding(.bottom)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.never)
             
-            TextField("Nom", text: $nom)
-                .padding(.bottom)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.never)
+            Group {
+                TextField("Identifiant", text: $identifiant)
+                    .padding(.bottom)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+                
+                TextField("Nom", text: $nom)
+                    .padding(.bottom)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+                
+                TextField("Prenom", text: $prenom)
+                    .padding(.bottom)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+                
+                TextField("Mail", text: $mail)
+                    .padding(.bottom)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+                
+                SecureField("Mot de passe", text: $mdp)
+                    .textContentType(.password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+            }
             
-            TextField("Prenom", text: $prenom)
-                .padding(.bottom)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.never)
             
-            TextField("Mail", text: $mail)
-                .padding(.bottom)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.never)
+            image?
+                .resizable()
+                .scaledToFit()
             
-            TextField("Mot de passe", text: $mdp)
-                .textContentType(.password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .disableAutocorrection(true)
-                .textInputAutocapitalization(.never)
+            Button {
+                showingImagePicker = true
+            } label: {
+                Text("Ajouter une photo")
+            }
             
-            Button{
+            Spacer()
+            
+            Button {
                 inscription()
             } label: {
                 Text("Valider l'inscription")
@@ -114,5 +147,9 @@ struct SignUpView: View {
         .padding()
         .navigationTitle("Inscription")
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: inputImage) { _ in loadImage()  }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $inputImage)
+        }
     }
 }

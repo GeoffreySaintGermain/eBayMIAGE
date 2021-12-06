@@ -53,7 +53,7 @@ struct SignInView: View {
                 .textInputAutocapitalization(.never)
                 .padding(.bottom)
             
-            TextField("Mot de passe", text: $password)
+            SecureField("Mot de passe", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())            
                 .disableAutocorrection(true)
                 .textInputAutocapitalization(.never)

@@ -27,15 +27,29 @@ struct UserInformationView: View {
             Spacer()
             
             HStack(alignment: .center) {
+                Spacer()
                 Text("photo ici")
+                Spacer()
             }
             
             Divider()
             
             Group {
-                Text("\(user.identifiant)")
-                Text("\(user.prenom) \(user.nom)")
-                Text("\(user.mail)")
+                HStack {
+                    Image(systemName: "person.circle")
+                        .padding(.leading)
+                    Text("\(user.identifiant ?? "")")
+                }
+                HStack {
+                    Image(systemName: "pencil.circle")
+                        .padding(.leading)
+                    Text("\(user.prenom) \(user.nom)")
+                }
+                HStack {
+                    Image(systemName: "envelope.circle")
+                        .padding(.leading)
+                    Text("\(user.mail ?? "")")
+                }
             }
                        
             Divider()
@@ -43,8 +57,6 @@ struct UserInformationView: View {
             
             DeconnectionButtonView()
                 .padding()
-            
-            Spacer()
         }.padding()
     }
 }

@@ -215,8 +215,7 @@ struct HistoricRowView: View {
     
     var body: some View {
         VStack {
-            Text("\(auction.id ?? 0)")
-            Text("\(auction.dateFormatted)")
+            Text(auction.dateFormatted, style: .date)
             Text("\(auction.prix, specifier: "%.2f")")
         }
     }

@@ -11,13 +11,14 @@ import Foundation
 class Utilisateur: Codable, ObservableObject {
     
     // MARK: Attributes
+    
     @Published var id: Int?
     
-    @Published var identifiant: String
+    @Published var identifiant: String?
     @Published var nom: String
     @Published var prenom: String
-    @Published var mail: String
-    @Published var mdp: String
+    @Published var mail: String?
+    @Published var mdp: String?
     @Published var photo: String?
     
     @Published var latitude: String
@@ -30,7 +31,7 @@ class Utilisateur: Codable, ObservableObject {
     }
     
     // MARK: Codable
-    
+
     enum CodingKeys: CodingKey {
         case id
         case identifiant
@@ -46,13 +47,14 @@ class Utilisateur: Codable, ObservableObject {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
-        identifiant = try container.decode(String.self, forKey: .identifiant)
+        
+        id = try container.decodeIfPresent(Int.self, forKey: .id)
+        identifiant = try container.decodeIfPresent(String.self, forKey: .identifiant)
         nom = try container.decode(String.self, forKey: .nom)
         prenom = try container.decode(String.self, forKey: .prenom)
-        mail = try container.decode(String.self, forKey: .mail)
-        mdp = try container.decode(String.self, forKey: .mdp)
-        photo = try container.decode(String.self, forKey: .photo)
+        mail = try container.decodeIfPresent(String.self, forKey: .mail)
+        mdp = try container.decodeIfPresent(String.self, forKey: .mdp)
+        photo = try container.decodeIfPresent(String.self, forKey: .photo)
         latitude = try container.decode(String.self, forKey: .latitude)
         longitude = try container.decode(String.self, forKey: .longitude)
     }
@@ -81,11 +83,9 @@ class Utilisateur: Codable, ObservableObject {
         self.photo = photo
         self.latitude = latitude
         self.longitude = longitude
-        self.photo = ".jpg"
+        self.photo = photo
     }
-    
-    // MARK: Init
-    
+
     public init() {
         self.identifiant = ""
         self.nom = ""
@@ -94,7 +94,7 @@ class Utilisateur: Codable, ObservableObject {
         self.mdp = ""
         self.latitude = ""
         self.longitude = ""
-        self.photo = ".jpg"
+        self.photo = ""
     }
     
     // MARK: Functions

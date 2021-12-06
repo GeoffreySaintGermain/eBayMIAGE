@@ -38,7 +38,7 @@ class Annonce: Codable, ObservableObject {
             return Date.now
         }
         
-        return dateFormatted.addingTimeInterval(1 * 60.0 * 60.0)
+        return dateFormatted
     }
     
     var endDate: Date {

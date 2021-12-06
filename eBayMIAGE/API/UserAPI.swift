@@ -34,6 +34,9 @@ class UserApi {
                 return
             }
             
+            let str = String(decoding: data, as: UTF8.self)
+            print(str)
+            
             do {
                 let decodedUserInformation = try JSONDecoder().decode(UserInformation.self, from: data)
                 print(decodedUserInformation)
