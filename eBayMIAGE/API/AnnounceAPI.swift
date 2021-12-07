@@ -17,7 +17,7 @@ class AnnounceAPI {
     func getAnnouncements(completion: @escaping ([Annonce]) -> ()) {
         if UserInformationDataStore.shared.informationFilled {
             
-            guard let url = URL(string: apiPathAnnounce) else {
+            guard let url = URL(string: apiPathCreateAnnounce) else {
                 print("invalid URL")
                 return
             }

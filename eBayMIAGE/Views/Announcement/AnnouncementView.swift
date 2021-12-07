@@ -33,7 +33,6 @@ struct AnnouncementView: View {
         
         locationManager.convertLatLongToAddress(latitude: latitude, longitude: longitude) { placemark in
             self.placemark = placemark
-            
         }
     }
     
@@ -90,6 +89,11 @@ struct AnnouncementEndedView: View {
         VStack {
             if let winner = winner {
                 WinnerView(winner: winner)
+                                
+                if announcement.idUtilisateur == UserInformationDataStore.shared.id {
+                    Divider()
+                    GetAppointmentView(announcement: announcement)
+                }
             } else {
                 Text("Aucun gagnant lors de cette enchère")
             }
@@ -101,12 +105,80 @@ struct AnnouncementEndedView: View {
 
 struct WinnerView: View {
     
+    @EnvironmentObject var locationManager: LocationManager
+    
     @State var winner: Utilisateur
+    
+    @State var placemark: CLPlacemark?
+    
+    private func getGeoLocalisation() {
+        guard let longitude = Double(winner.longitude) else {
+            print("error get longitude")
+            return
+        }
+        
+        guard let latitude = Double(winner.latitude) else {
+            print("error get latitude")
+            return
+        }
+        
+        locationManager.convertLatLongToAddress(latitude: latitude, longitude: longitude) { placemark in
+            self.placemark = placemark
+        }
+    }
     
     var body: some View {
         VStack {
             Text("Gagnant de l'enchère")
-            Text("\(winner.nom), \(winner.prenom)")                        
+            Text("\(winner.nom), \(winner.prenom)")
+            
+            Text("Localisation du gagnant :")
+            if let placemark = self.placemark {
+                Text("\t\(placemark.locality ?? "Ville inconnu")")
+                Text("\t\(placemark.postalCode ?? "Code Postal inconnu")")
+                Text("\t\(placemark.country ?? "Pays inconnu")")
+            } else {
+                Text("Emplacement inconnu")
+            }
+            
+        }
+    }
+}
+
+struct GetAppointmentView: View {
+    
+    @State private var selectedDate = Date()
+    
+    let announcement: Annonce
+    
+    @State var appointment: Appointment?
+    
+    private func validateDateAppointment() {
+        let appointment = Appointment(idAnnouncement: announcement.id, dateAppointment: selectedDate)
+        
+        AppointmentAPI().fixAppointment(appointment: appointment) { isOk in
+            if isOk {
+                // Get Appointment
+            }
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            if appointment != nil {
+                Text(Date(), style: .date)
+                    .environment(\.locale, Locale(identifier: "fr"))
+            } else {
+                DatePicker("Date de rendez vous", selection: $selectedDate, displayedComponents: .date)
+                    .environment(\.locale, Locale.init(identifier: "fr"))
+                
+                Button {
+                    validateDateAppointment()
+                } label: {
+                    Text("Valider le rendez bvous")
+                }
+            }
         }
     }
 }
@@ -182,8 +254,7 @@ struct AnnouncementStillInProgressView: View {
                             self.prix = filtered
                         }
                     }
-            
-            
+                        
                 Button {
                     encherir()
                 } label: {

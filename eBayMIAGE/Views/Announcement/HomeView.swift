@@ -38,7 +38,7 @@ struct AnnouncerView: View {
     
     private func getAnnouncements() {
         AnnounceAPI().getAnnouncements(completion: { announcementsApi in
-            myAnnouncements = announcementsApi.filter { $0.idUtilisateur == UserInformationDataStore.shared.id }
+            myAnnouncements = announcementsApi
         })
     }
     

@@ -11,6 +11,9 @@
 		AA37D3FD27527793009F8E36 /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37D3FC27527793009F8E36 /* UserInformation.swift */; };
 		AA37D401275278F7009F8E36 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37D400275278F7009F8E36 /* UserAPI.swift */; };
 		AA37D40327527A55009F8E36 /* UserInformationDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37D40227527A55009F8E36 /* UserInformationDataStore.swift */; };
+		AA413CDE275FC05700FE380E /* Formatter+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA413CDD275FC05700FE380E /* Formatter+extension.swift */; };
+		AA413CE0275FC46E00FE380E /* AppointmentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA413CDF275FC46E00FE380E /* AppointmentAPI.swift */; };
+		AA413CE2275FC67600FE380E /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA413CE1275FC67600FE380E /* Appointment.swift */; };
 		AA5C7B05275EBC27001BC075 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5C7B04275EBC27001BC075 /* ImagePicker.swift */; };
 		AA8620B82756211700A47FA2 /* AuctionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8620B72756211700A47FA2 /* AuctionAPI.swift */; };
 		AA8E15B2275293200088E962 /* NotSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8E15B1275293200088E962 /* NotSignView.swift */; };
@@ -40,6 +43,9 @@
 		AA37D3FC27527793009F8E36 /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 		AA37D400275278F7009F8E36 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		AA37D40227527A55009F8E36 /* UserInformationDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationDataStore.swift; sourceTree = "<group>"; };
+		AA413CDD275FC05700FE380E /* Formatter+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+extension.swift"; sourceTree = "<group>"; };
+		AA413CDF275FC46E00FE380E /* AppointmentAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentAPI.swift; sourceTree = "<group>"; };
+		AA413CE1275FC67600FE380E /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		AA5C7B04275EBC27001BC075 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AA8620B72756211700A47FA2 /* AuctionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionAPI.swift; sourceTree = "<group>"; };
 		AA8E15B1275293200088E962 /* NotSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotSignView.swift; sourceTree = "<group>"; };
@@ -84,6 +90,7 @@
 				AA37D400275278F7009F8E36 /* UserAPI.swift */,
 				AADD3857275542BE00DF72BF /* AnnounceAPI.swift */,
 				AA8620B72756211700A47FA2 /* AuctionAPI.swift */,
+				AA413CDF275FC46E00FE380E /* AppointmentAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -168,6 +175,7 @@
 				AAE1D8EB273FF2BD00B93028 /* Enchere.swift */,
 				AA37D3FC27527793009F8E36 /* UserInformation.swift */,
 				AA8E15B327529AA90088E962 /* ConnectionInformation.swift */,
+				AA413CE1275FC67600FE380E /* Appointment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,6 +186,7 @@
 				AAE1D8F027412AA300B93028 /* Buttons.swift */,
 				AAE12A7F275C107D00DB8CB9 /* LocationManager.swift */,
 				AA5C7B04275EBC27001BC075 /* ImagePicker.swift */,
+				AA413CDD275FC05700FE380E /* Formatter+extension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -270,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA37D3FD27527793009F8E36 /* UserInformation.swift in Sources */,
+				AA413CDE275FC05700FE380E /* Formatter+extension.swift in Sources */,
 				AADD3858275542BE00DF72BF /* AnnounceAPI.swift in Sources */,
 				AAAD75EC274CD02B00858FA0 /* AnnouncementView.swift in Sources */,
 				AAE1D8EC273FF2BD00B93028 /* Enchere.swift in Sources */,
@@ -280,10 +290,12 @@
 				AA37D40327527A55009F8E36 /* UserInformationDataStore.swift in Sources */,
 				AAE1D8F92743944700B93028 /* ProfileView.swift in Sources */,
 				AAE1D8F4274141B000B93028 /* UtilisateurDataStore.swift in Sources */,
+				AA413CE2275FC67600FE380E /* Appointment.swift in Sources */,
 				AAE1D8DB273FE9C300B93028 /* NewAnnouncementView.swift in Sources */,
 				AAE1D8E7273FF27E00B93028 /* Annonce.swift in Sources */,
 				AAE1D8E1273FEC6000B93028 /* SignUpView.swift in Sources */,
 				AAE1D8F127412AA300B93028 /* Buttons.swift in Sources */,
+				AA413CE0275FC46E00FE380E /* AppointmentAPI.swift in Sources */,
 				AA8E15B2275293200088E962 /* NotSignView.swift in Sources */,
 				AA8E15B427529AA90088E962 /* ConnectionInformation.swift in Sources */,
 				AA8620B82756211700A47FA2 /* AuctionAPI.swift in Sources */,
