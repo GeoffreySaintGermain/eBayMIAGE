@@ -9,10 +9,13 @@ import Foundation
 
 class Appointment: Codable {
     var idAnnouncement: Int
-    var dateAppointment: String
+    var date: String
     
     public init(idAnnouncement: Int, dateAppointment: Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
         self.idAnnouncement = idAnnouncement
-        self.dateAppointment = dateAppointment.ISO8601Format()
+        self.date = formatter.string(from: dateAppointment)
     }
 }

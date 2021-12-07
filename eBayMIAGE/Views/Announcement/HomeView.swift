@@ -37,7 +37,7 @@ struct AnnouncerView: View {
     @State var myAnnouncements: [Annonce] = []
     
     private func getAnnouncements() {
-        AnnounceAPI().getAnnouncements(completion: { announcementsApi in
+        AnnounceAPI().getMyAnnouncements(completion: { announcementsApi in
             myAnnouncements = announcementsApi
         })
     }

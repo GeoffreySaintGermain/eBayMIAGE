@@ -16,7 +16,7 @@ class Annonce: Codable, ObservableObject {
     var etat: AnnouncementState
     
     var dateCreation: String
-    var dateLivraison: Date?
+    var dateLivraison: String?
     var duree: Int
     
     var latitude: String?
@@ -36,6 +36,24 @@ class Annonce: Codable, ObservableObject {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
         guard let dateFormatted = dateFormatter.date(from: dateCreation) else {
             return Date.now
+        }
+        
+        return dateFormatted
+    }
+    
+    var dateLivraisonFormatted: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+        
+        guard let dateLivraison = dateLivraison else {
+            return nil
+        }
+        
+        guard let dateFormatted = dateFormatter.date(from: dateLivraison) else {
+            return nil
         }
         
         return dateFormatted
@@ -70,7 +88,7 @@ class Annonce: Codable, ObservableObject {
         prixPlanche = try container.decode(Double.self, forKey: .prixPlanche)
         etat = try container.decode(AnnouncementState.self, forKey: .etat)
         dateCreation = try container.decode(String.self, forKey: .dateCreation)
-        dateLivraison = try container.decode(Date?.self, forKey: .dateLivraison)
+        dateLivraison = try container.decode(String?.self, forKey: .dateLivraison)
         duree = try container.decode(Int.self, forKey: .duree)
         photo = try container.decode(String.self, forKey: .photo)
         idUtilisateur = try container.decode(Int.self, forKey: .idUtilisateur)

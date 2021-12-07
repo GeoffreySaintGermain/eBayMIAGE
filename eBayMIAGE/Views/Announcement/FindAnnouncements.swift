@@ -11,18 +11,12 @@ struct FindAnnouncements: View {
     
     @State var otherAnnouncementsNotBid: [Annonce] = []
     
-    private func getAnnouncements() {
-        AuctionAPI().getMyAuctions(completion: { announcements in
-            AnnounceAPI().getAnnouncements(completion: { announcements in
-                let otherAnnouncements = announcements.filter({ $0.idUtilisateur != UserInformationDataStore.shared.id })
-                
-                otherAnnouncementsNotBid = otherAnnouncements.filter({ otherAnnouncement in
-                    otherAnnouncements.contains(where: { otherAnnouncement.id == $0.id  })
-                })
-            })
+    private func getAnnouncements() {        
+        AnnounceAPI().getAnnouncements(completion: { announcements in
+            let otherAnnouncements = announcements.filter({ $0.idUtilisateur != UserInformationDataStore.shared.id })
+            
+            otherAnnouncementsNotBid = otherAnnouncements
         })
-        
-        
     }
     
     var body: some View {

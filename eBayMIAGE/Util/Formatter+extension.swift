@@ -8,9 +8,11 @@
 import Foundation
 
 extension Formatter {
+    
     static let weekDay: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "fr")
         return formatter
     }()
 }
+

@@ -149,7 +149,7 @@ struct GetAppointmentView: View {
     
     @State private var selectedDate = Date()
     
-    let announcement: Annonce
+    @State var announcement: Annonce
     
     @State var appointment: Appointment?
     
@@ -158,7 +158,9 @@ struct GetAppointmentView: View {
         
         AppointmentAPI().fixAppointment(appointment: appointment) { isOk in
             if isOk {
-                // Get Appointment
+                AnnounceAPI().getAnnouncement(idAnnouncement: announcement.id) { announcment in
+                    self.announcement = announcment
+                }
             }
         }
     }
@@ -166,9 +168,13 @@ struct GetAppointmentView: View {
     var body: some View {
         VStack(alignment: .leading) {
             
-            if appointment != nil {
-                Text(Date(), style: .date)
-                    .environment(\.locale, Locale(identifier: "fr"))
+            if announcement.dateLivraison != nil {
+                Text("Date du rendez vous")
+                
+                if let announcementDateLivraison = announcement.dateLivraisonFormatted {
+                    Text(announcementDateLivraison, style: .date)
+                        .environment(\.locale, Locale(identifier: "fr"))
+                }
             } else {
                 DatePicker("Date de rendez vous", selection: $selectedDate, displayedComponents: .date)
                     .environment(\.locale, Locale.init(identifier: "fr"))
@@ -176,8 +182,10 @@ struct GetAppointmentView: View {
                 Button {
                     validateDateAppointment()
                 } label: {
-                    Text("Valider le rendez bvous")
+                    Text("Prendre le rendez vous")
+                        .frame(minWidth: 0, maxWidth: .infinity)
                 }
+                .buttonStyle(OrangeButton())                
             }
         }
     }
@@ -285,9 +293,10 @@ struct HistoricRowView: View {
     var auction: Enchere
     
     var body: some View {
-        VStack {
-            Text(auction.dateFormatted, style: .date)
-            Text("\(auction.prix, specifier: "%.2f")")
+        VStack(alignment: .leading){
+            Text("\(auction.dateFormatted, style: .date) \(auction.dateFormatted, style: .time)")
+                .environment(\.locale, Locale.init(identifier: "fr"))
+            Text("\(auction.prix, specifier: "%.2f")€")
         }
     }
 }

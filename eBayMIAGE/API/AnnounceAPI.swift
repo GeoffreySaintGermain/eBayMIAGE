@@ -17,6 +17,42 @@ class AnnounceAPI {
     func getAnnouncements(completion: @escaping ([Annonce]) -> ()) {
         if UserInformationDataStore.shared.informationFilled {
             
+            guard let url = URL(string: apiPathAnnounce) else {
+                print("invalid URL")
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(UserInformationDataStore.shared.token)", forHTTPHeaderField: "Authorization")
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                guard let data = data else {
+                    print("error while fetching data")
+                    return
+                }
+                
+                do {
+                    let decodedAnnouncements = try JSONDecoder().decode([Annonce].self, from: data)
+                    print(decodedAnnouncements)
+                    DispatchQueue.main.async {
+                        completion(decodedAnnouncements)
+                    }
+                } catch {
+                    print("error in decoding json")
+                }
+                
+            }.resume()
+        } else {
+            print("User not log in")
+        }
+    }
+    
+    func getMyAnnouncements(completion: @escaping ([Annonce]) -> ()) {
+        if UserInformationDataStore.shared.informationFilled {
+            
             guard let url = URL(string: apiPathCreateAnnounce) else {
                 print("invalid URL")
                 return
@@ -74,5 +110,44 @@ class AnnounceAPI {
                 completion(false)
             }
         }.resume()
-    }        
+    }
+    
+    func getAnnouncement(idAnnouncement: Int, completion: @escaping (Annonce) -> ()) {
+        if UserInformationDataStore.shared.informationFilled {
+            
+            let apiPathGetAnnouncement = "\(apiPathAnnounce)/\(idAnnouncement)"
+            
+            guard let url = URL(string: apiPathGetAnnouncement) else {
+                print("invalid URL")
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(UserInformationDataStore.shared.token)", forHTTPHeaderField: "Authorization")
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                guard let data = data else {
+                    print("error while fetching data")
+                    return
+                }
+                
+                do {
+                    let decodedAnnouncement = try JSONDecoder().decode(Annonce.self, from: data)
+                    print(decodedAnnouncement)
+                    DispatchQueue.main.async {
+                        completion(decodedAnnouncement)
+                    }
+                } catch {
+                    print("error in decoding json")
+                }
+                
+            }.resume()
+        } else {
+            print("User not log in")
+        }
+    }
+    
 }

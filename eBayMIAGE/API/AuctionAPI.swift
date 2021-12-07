@@ -123,11 +123,17 @@ class AuctionAPI {
             print(str)
             
             DispatchQueue.main.async {
-                if error == nil {
-                    completion(false)
+                if let response = response as? HTTPURLResponse {                    
+                    if response.statusCode == 201 {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
                 } else {
-                    completion(true)
+                    completion(false)
                 }
+                
+                
             }
         }.resume()
     }
