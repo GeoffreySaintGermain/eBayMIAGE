@@ -73,124 +73,6 @@ struct AnnouncementView: View {
     }
 }
 
-struct AnnouncementEndedView: View {
-    
-    var announcement: Annonce
-    
-    @State var winner: Utilisateur?
-    
-    private func getWinner() {
-        AuctionAPI().getWinner(announce: announcement) { user in
-            winner = user
-        }
-    }
-    
-    var body: some View {
-        VStack {
-            if let winner = winner {
-                WinnerView(winner: winner)
-                                
-                if announcement.idUtilisateur == UserInformationDataStore.shared.id {
-                    Divider()
-                    GetAppointmentView(announcement: announcement)
-                }
-            } else {
-                Text("Aucun gagnant lors de cette enchère")
-            }
-        }.onAppear {
-            getWinner()
-        }
-    }
-}
-
-struct WinnerView: View {
-    
-    @EnvironmentObject var locationManager: LocationManager
-    
-    @State var winner: Utilisateur
-    
-    @State var placemark: CLPlacemark?
-    
-    private func getGeoLocalisation() {
-        guard let longitude = Double(winner.longitude) else {
-            print("error get longitude")
-            return
-        }
-        
-        guard let latitude = Double(winner.latitude) else {
-            print("error get latitude")
-            return
-        }
-        
-        locationManager.convertLatLongToAddress(latitude: latitude, longitude: longitude) { placemark in
-            self.placemark = placemark
-        }
-    }
-    
-    var body: some View {
-        VStack {
-            Text("Gagnant de l'enchère")
-            Text("\(winner.nom), \(winner.prenom)")
-            
-            Text("Localisation du gagnant :")
-            if let placemark = self.placemark {
-                Text("\t\(placemark.locality ?? "Ville inconnu")")
-                Text("\t\(placemark.postalCode ?? "Code Postal inconnu")")
-                Text("\t\(placemark.country ?? "Pays inconnu")")
-            } else {
-                Text("Emplacement inconnu")
-            }
-            
-        }
-    }
-}
-
-struct GetAppointmentView: View {
-    
-    @State private var selectedDate = Date()
-    
-    @State var announcement: Annonce
-    
-    @State var appointment: Appointment?
-    
-    private func validateDateAppointment() {
-        let appointment = Appointment(idAnnouncement: announcement.id, dateAppointment: selectedDate)
-        
-        AppointmentAPI().fixAppointment(appointment: appointment) { isOk in
-            if isOk {
-                AnnounceAPI().getAnnouncement(idAnnouncement: announcement.id) { announcment in
-                    self.announcement = announcment
-                }
-            }
-        }
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            
-            if announcement.dateLivraison != nil {
-                Text("Date du rendez vous")
-                
-                if let announcementDateLivraison = announcement.dateLivraisonFormatted {
-                    Text(announcementDateLivraison, style: .date)
-                        .environment(\.locale, Locale(identifier: "fr"))
-                }
-            } else {
-                DatePicker("Date de rendez vous", selection: $selectedDate, displayedComponents: .date)
-                    .environment(\.locale, Locale.init(identifier: "fr"))
-                
-                Button {
-                    validateDateAppointment()
-                } label: {
-                    Text("Prendre le rendez vous")
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                }
-                .buttonStyle(OrangeButton())                
-            }
-        }
-    }
-}
-
 struct AnnouncementStillInProgressView: View {
     
     @Environment(\.presentationMode) var presentationMode
@@ -284,6 +166,145 @@ struct AnnouncementStillInProgressView: View {
             }
         }.onAppear {
             getHistoric()
+        }
+    }
+}
+
+struct AnnouncementEndedView: View {
+    
+    var announcement: Annonce
+    
+    @State var winner: Utilisateur?
+    
+    private func getWinner() {
+        AuctionAPI().getWinner(announce: announcement) { user in
+            winner = user
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            if let winner = winner {
+                WinnerView(winner: winner)
+                                
+                if announcement.idUtilisateur == UserInformationDataStore.shared.id {
+                    Divider()
+                    GetAppointmentView(announcement: announcement)
+                }
+                
+                if winner.id == UserInformationDataStore.shared.id {
+                    GetAppointmentWinnerView(announcement: announcement)
+                }
+                    
+            } else {
+                Text("Aucun gagnant lors de cette enchère")
+            }
+        }.onAppear {
+            getWinner()
+        }
+    }
+}
+
+struct WinnerView: View {
+    
+    @EnvironmentObject var locationManager: LocationManager
+    
+    @State var winner: Utilisateur
+    
+    @State var placemark: CLPlacemark?
+    
+    private func getGeoLocalisation() {
+        guard let longitude = Double(winner.longitude) else {
+            print("error get longitude")
+            return
+        }
+        
+        guard let latitude = Double(winner.latitude) else {
+            print("error get latitude")
+            return
+        }
+        
+        locationManager.convertLatLongToAddress(latitude: latitude, longitude: longitude) { placemark in
+            self.placemark = placemark
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Gagnant de l'enchère :")
+            Text("\(winner.nom), \(winner.prenom)")
+            
+            Text("Localisation du gagnant :")
+            if let placemark = self.placemark {
+                Text("\t\(placemark.locality ?? "Ville inconnu")")
+                Text("\t\(placemark.postalCode ?? "Code Postal inconnu")")
+                Text("\t\(placemark.country ?? "Pays inconnu")")
+            } else {
+                Text("Emplacement inconnu")
+            }
+            
+        }
+    }
+}
+
+struct GetAppointmentWinnerView: View {
+    
+    @State var announcement: Annonce
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            if let announcementDateLivraison = announcement.dateLivraisonFormatted {
+                Divider()
+                Text("Date de rendez vous")
+                Text(announcementDateLivraison, style: .date)
+                    .environment(\.locale, Locale(identifier: "fr"))
+            }
+        }
+    }
+}
+
+struct GetAppointmentView: View {
+    
+    @State private var selectedDate = Date()
+    
+    @State var announcement: Annonce
+    
+    @State var appointment: Appointment?
+    
+    private func validateDateAppointment() {
+        let appointment = Appointment(idAnnouncement: announcement.id, dateAppointment: selectedDate)
+        
+        AppointmentAPI().fixAppointment(appointment: appointment) { isOk in
+            if isOk {
+                AnnounceAPI().getAnnouncement(idAnnouncement: announcement.id) { announcment in
+                    self.announcement = announcment
+                }
+            }
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            
+            if announcement.dateLivraison != nil {
+                Text("Date du rendez vous")
+                
+                if let announcementDateLivraison = announcement.dateLivraisonFormatted {
+                    Text(announcementDateLivraison, style: .date)
+                        .environment(\.locale, Locale(identifier: "fr"))
+                }
+            } else {
+                DatePicker("Date de rendez vous", selection: $selectedDate, displayedComponents: .date)
+                    .environment(\.locale, Locale.init(identifier: "fr"))
+                
+                Button {
+                    validateDateAppointment()
+                } label: {
+                    Text("Prendre le rendez vous")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                }
+                .buttonStyle(OrangeButton())                
+            }
         }
     }
 }

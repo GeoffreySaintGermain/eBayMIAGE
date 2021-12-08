@@ -42,31 +42,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 return
             }
             
-            // Location name
-            if let locationName = placeMark.location {
-                print(locationName)
-            }
-            // Street address
-            if let street = placeMark.thoroughfare {
-                print(street)
-            }
-            // City
-            if let city = placeMark.locality {
-                print(city)
-            }
-            // State
-            if let state = placeMark.administrativeArea {
-                print(state)
-            }
-            // Zip code
-            if let zipCode = placeMark.postalCode {
-                print(zipCode)
-            }
-            // Country
-            if let country = placeMark.country {
-                print(country)
-            }
-            
             completion(placeMark)
         })        
     }
