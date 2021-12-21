@@ -71,7 +71,14 @@ struct AnnouncerRowView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "1.square.fill")
+            if let announcementPhoto = announcement.photoFrom64Encoded {
+                announcementPhoto
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+            } else {
+                Image(systemName: "1.square.fill")                    
+            }
             
             VStack(alignment: .leading) {
                 HStack {
@@ -151,7 +158,14 @@ struct BidderRow: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "1.square.fill")
+            if let announcementPhoto = announcement.photoFrom64Encoded {
+                announcementPhoto
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+            } else {
+                Image(systemName: "1.square.fill")                    
+            }
             
             VStack(alignment: .leading) {
                 HStack {

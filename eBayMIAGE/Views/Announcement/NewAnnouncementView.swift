@@ -24,11 +24,23 @@ struct NewAnnouncementSheetView: View {
     @State var announcementLatitude: String?
     @State var announcementLongitude: String?
     
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+    @State var image: Image?
+    
     private func sendAnnouncement() {        
         if checkInput() {
+            var photo: String = ""
+            
+            if let inputImage = inputImage {
+                photo = inputImage
+                    .jpegData(compressionQuality: 0)?
+                    .base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters) ?? ""
+            }
+            
             announcementDuration = hours*60 + minutes
             
-            let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice ?? 0, duree: announcementDuration, photo: "", latitude: "\(locationManager.location?.latitude ?? 0)", longitude: "\(locationManager.location?.longitude ?? 0)")
+            let newAnnouncement = Annonce(nom: announcementName, description: announcementDescription, prixPlanche: announcementPrice ?? 0, duree: announcementDuration, photo: photo, latitude: "\(locationManager.location?.latitude ?? 0)", longitude: "\(locationManager.location?.longitude ?? 0)")
             
             AnnounceAPI().createAnnouncement(newAnnouncement: newAnnouncement) { isOk in
                 if isOk {
@@ -60,6 +72,11 @@ struct NewAnnouncementSheetView: View {
         }
         
         return inputIsOk
+    }
+    
+    private func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
     }
     
     var body: some View {
@@ -107,6 +124,21 @@ struct NewAnnouncementSheetView: View {
                 Spacer()
             }.padding(.horizontal)
             
+            HStack {
+                Spacer()
+                image?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 60, height: 60)
+                Spacer()
+            }
+            
+            Button {
+                showingImagePicker = true
+            } label: {
+                Text("Ajouter une photo")
+            }
+            
             Button {
                 sendAnnouncement()
             } label: {
@@ -117,5 +149,10 @@ struct NewAnnouncementSheetView: View {
             .buttonStyle(OrangeButton())
         }
         .padding()
+        .onChange(of: inputImage) { _ in loadImage()  }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $inputImage)
+        }
     }
+    
 }

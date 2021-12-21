@@ -123,8 +123,7 @@ struct SignUpView: View {
                     .disableAutocorrection(true)
                     .textInputAutocapitalization(.never)
             }
-            
-            
+                        
             image?
                 .resizable()
                 .scaledToFit()

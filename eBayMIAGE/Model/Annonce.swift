@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class Annonce: Codable, ObservableObject {
     var id: Int
@@ -61,6 +62,14 @@ class Annonce: Codable, ObservableObject {
     
     var endDate: Date {
         dateFormatted.addingTimeInterval(Double(duree) * 60.0)
+    }
+    
+    var photoFrom64Encoded: Image? {
+        if let data = Data(base64Encoded: photo, options: .ignoreUnknownCharacters), let uiImage = UIImage(data: data) {
+                return Image(uiImage: uiImage)
+        } else {
+            return nil
+        }
     }
     
     // MARK: Codable

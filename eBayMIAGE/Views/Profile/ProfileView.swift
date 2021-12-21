@@ -24,11 +24,15 @@ struct UserInformationView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            
             Spacer()
             
             HStack(alignment: .center) {
                 Spacer()
-                Text("photo ici")
+                user.photoFrom64Encoded?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
                 Spacer()
             }
             

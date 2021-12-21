@@ -17,7 +17,6 @@ struct AnnouncementView: View {
     
     var dismissClosure: () -> Void
     
-    var timer = 0
     @State var placemark: CLPlacemark?
     
     private func getGeoLocalisation() {
@@ -41,6 +40,15 @@ struct AnnouncementView: View {
             Text("Annonce")
                 .font(.title)
                 .bold()
+            
+            HStack {
+                Spacer()
+                announcement.photoFrom64Encoded?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 60, height: 60)
+                Spacer()
+            }
             
             Text("\(announcement.nom)")
             Text("\(announcement.description)")
@@ -83,6 +91,8 @@ struct AnnouncementStillInProgressView: View {
     
     @State var prix: String = "0"
     
+    @State private var run = true
+    
     private func getHistoric() {
         AuctionAPI().getHistoricAuctions(annonceId: announcement.id, completion: { auctions in
             historic = auctions
@@ -115,7 +125,6 @@ struct AnnouncementStillInProgressView: View {
         if  prixDouble == 0.0 || (historic.count == 0 && historic.contains(where: { $0.prix > prixDouble })) {
             inputIsOk = false
         }
-        
         return inputIsOk
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class Utilisateur: Codable, ObservableObject {
     
@@ -28,6 +29,18 @@ class Utilisateur: Codable, ObservableObject {
     
     var isLogged: Bool {
         id != nil
+    }
+    
+    var photoFrom64Encoded: Image? {
+        guard let photo = photo else {
+            return nil
+        }
+        
+        if let data = Data(base64Encoded: photo, options: .ignoreUnknownCharacters), let uiImage = UIImage(data: data) {
+                return Image(uiImage: uiImage)
+        } else {
+            return nil
+        }
     }
     
     // MARK: Codable
