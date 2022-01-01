@@ -102,7 +102,7 @@ struct AnnouncementStillInProgressView: View {
     private func encherir() {
         let prixDouble = Double(prix) ?? 0.0
         
-        if checkInput(prixDouble: prixDouble) {
+        if checkInput() {
             
             let newAuction = Enchere(prix: Double(prix) ?? 0.0)
             
@@ -119,10 +119,11 @@ struct AnnouncementStillInProgressView: View {
         }
     }
     
-    private func checkInput(prixDouble: Double) -> Bool {
+    private func checkInput() -> Bool {
         var inputIsOk = true
+        let prixDouble = Double(prix) ?? 0.0
         
-        if  prixDouble == 0.0 || (historic.count == 0 && historic.contains(where: { $0.prix > prixDouble })) {
+        if  prixDouble <= announcement.prixPlanche || (historic.count > 0 && historic.contains(where: { $0.prix >= prixDouble })) {
             inputIsOk = false
         }
         return inputIsOk
@@ -141,12 +142,15 @@ struct AnnouncementStillInProgressView: View {
             }
             
             if announcement.idUtilisateur != UserInformationDataStore.shared.id {
-            
                 Text("Enchérir").bold()
                 
                 TextField("Prix de la nouvelle enchère", text: $prix)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5.0)
+                            .stroke(checkInput() ? Color.green : Color.red, lineWidth: 2.0)
+                    )
                     .onReceive(Just(prix)) { newValue in
                         let filtered = newValue.filter { "0123456789".contains($0) }
                         if filtered != newValue {
@@ -242,16 +246,6 @@ struct WinnerView: View {
         VStack(alignment: .leading) {
             Text("Gagnant de l'enchère :")
             Text("\(winner.nom), \(winner.prenom)")
-            
-            Text("Localisation du gagnant :")
-            if let placemark = self.placemark {
-                Text("\t\(placemark.locality ?? "Ville inconnu")")
-                Text("\t\(placemark.postalCode ?? "Code Postal inconnu")")
-                Text("\t\(placemark.country ?? "Pays inconnu")")
-            } else {
-                Text("Emplacement inconnu")
-            }
-            
         }
     }
 }

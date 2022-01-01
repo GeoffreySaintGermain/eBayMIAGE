@@ -6,7 +6,6 @@
 //
 
 import CoreLocation
-import CoreLocationUI
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
@@ -19,6 +18,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func requestLocation() {
+        manager.requestWhenInUseAuthorization()
         manager.requestLocation()
     }
 
@@ -27,7 +27,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Swift.Error) {
-        print("error:: (error)")        
+        print("error:: \(error.localizedDescription)")
     }
     
     func convertLatLongToAddress(latitude: Double, longitude: Double, completion: @escaping (CLPlacemark) -> ()) {

@@ -84,10 +84,6 @@ struct SignUpView: View {
         image = Image(uiImage: inputImage)
     }
     
-    private func reencode() {
-        
-    }
-    
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
@@ -145,12 +141,6 @@ struct SignUpView: View {
             .buttonStyle(OrangeButton())
             .padding(.top)
             
-            Button {
-                reencode()
-            } label: {
-                Text("Réencode")
-            }
-            
             Spacer()
         }
         .padding()
@@ -160,5 +150,8 @@ struct SignUpView: View {
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(image: $inputImage)
         }
+        .onAppear(perform: {
+            locationManager.requestLocation()
+        })
     }
 }

@@ -178,7 +178,7 @@ struct BidderRow: View {
                     }                    
                 }
                 
-                Text("prix")
+                Text("\(announcement.prixPlanche, specifier: "%.2f")€")
             }
         }
     }
